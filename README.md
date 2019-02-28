@@ -1,2 +1,3 @@
-# petR
-Aulas e Material do Workshop de R com o PET da Faculdade de Economia da UFF
+# petR - Curso de R para o PET
+
+Aqui estão o material das aulas em todas as suas formas. Slides, bases de dados e eventuais scripts.
