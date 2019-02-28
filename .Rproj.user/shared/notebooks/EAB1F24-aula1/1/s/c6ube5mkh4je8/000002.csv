@@ -1,0 +1,21 @@
+"0","install.packages(""rootSolve"")
+"
+"2","Installing package into ‘C:/Users/Pichau/Documents/R/win-library/3.5’
+(as ‘lib’ is unspecified)
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.5/rootSolve_1.7.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 787735 bytes (769 KB)
+"
+"2","downloaded 769 KB
+
+"
+"1","package â€˜rootSolveâ€™ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1","The downloaded binary packages are in
+	C:\Users\Pichau\AppData\Local\Temp\RtmpAjMYhY\downloaded_packages"
+"1","
+"

@@ -1,0 +1,6 @@
+"0","base = data.frame(primeiro = elemento1,
+                  segundo = elemento2)
+"
+"2","Error in data.frame(primeiro = elemento1, segundo = elemento2) : 
+  arguments imply differing number of rows: 100, 101
+"

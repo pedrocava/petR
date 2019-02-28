@@ -1,0 +1,289 @@
+---
+title: "Aula 1 - Introdução e Sintaxe"
+author: "Pedro Cavalcante"
+date: "20 de fevereiro de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# O que é R
+
+R é uma linguagem de programação voltada para estatística e análise de dados _open-source_, gratuita e de natureza colaborativa. Como vamos ver, o ambiente voltado para análise de dados facilita enormemente as tarefas do ciclo.
+
+![O ciclo da análise de dados](https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png)
+
+Instalar o R é muito simples, ele está disponível em http://cran.r-project.org/. É importante depois instalar o RStudio, disponível em https://www.rstudio.org/, que é uma IDE (Integrated Development Enviroment). IDEs são progrmas que facilitam, e muito, programar porque trazem um ambiente gráfico mais intuitivo, disponibilizando informações como quais objetos estão carregados na memória do computador, visualização de gráficos e animações que fazemos e por aí vai. 
+
+![O ambiente do RStudio](http://www.sthda.com/sthda/RDoc/images/rstudio.png)
+
+# Links importantes
+
+* [Github](https://github.com)
+
+É como uma "rede social de códigos" com várias funcionalidades úteis para cuidar dos seus códigos e gerenciar projetos. É muito importante fazer uma conta lá e usar o programa para lidar adequadamente com o armazenamento dos códigos. O Github é particularmente útil para trabalhar com outras pessoas porque armazena versões antigas, quem fez que alterações nos códigos, evita conflito entre versões de programas e mantém tudo numa fonte única e facilmente acessível.
+
+* [StackOverflow](https://stackoverflow.com/)
+
+Um fórum extremamente popular em inglês sobre programação. A maior parte das suas dúvidas já foi resolvida lá e se não foi, é muito simples fazer uma nova pergunta.
+
+* [CrossValidated](https://stats.stackexchange.com/)
+
+Uma espécie de StackOverflow, mas voltada para análise de dados. Quando a dúvida for mais estatístisca do que de programação em si, é melhor conferir aqui. A maioria dos usuários sabe R e vai pedir algum pedaço de código para entender o seu problema bem.
+
+* [R: Uma Introdução para Economistas](https://danmrc.github.io/R-para-Economistas/)
+
+Uma fonte ótima para consultas rápidas.
+
+* [R for Data Science](https://r4ds.had.co.nz)
+
+A fonte definitiva do R introdutório. É um livro em inglês muito extenso e deve cobrir razoavelmente qualquer assunto que um iniciante queira entender melhor. 
+
+# Os primeiros comandos
+
+Tenha em mente que você pode anotar linhas de código na área do script e rodar linhas específicas copiando-as no console, digiando-as diretamente lá ou selecionando o trecho do script desejado e apertando ``ctrl + enter``.
+
+A grande vantagem do R é sua naturza colaborativa. Pesquisadores, programadores, profissionais e entusiastas do mundo todo escrevem *pacotes* com funcionalidades novas, que incluem coisas como ferramentas para econometria bayseana, gerar animaçãoes, estimar dinâmicas evolutivas, resolver problemas de otimização e gerir blogs. Pacotes tem nomes e eles trazem *funções* novas. Normalmente nos referimos a uma função na forma ``pacote::função`` ou ``função()``. Então se lemos ``dplyr::filter`` sabemos que é a função ``filter()`` do pacote ``dplyr``. 
+
+Alguns pacotes já vêm carregados no R, eles são o que chamamos de Biblioteca Padrão, a versão mais simples do R. Os mais importantes pacotes da BP são o ``base`` com toda a sintaxe básica da linguagem, o ``stats`` com dezenas de ferramentas estatísticas muito úteis e o ``utils`` com várias funções miscelâneas. 
+
+No entanto, a maioria dos pacotes não vem carregada no R diretamente. Eles estão sediados no que chamamos de Comprehensive R Archive Network (CRAN). Podemos instalar esses pacotes facilmente e depois é simples carrega-los. Vamos baixar o ``rootSolve``, que traz funções para resolver equações e problemas de cálculo diferencial.
+
+```{R, eval = FALSE}
+install.packages("rootSolve")
+library(rootSolve)
+```
+
+``install.packages()`` só precisa que você dê o nome do pacote que o R instala para você. ``library()`` serve para carregar o pacote e ter essas funções novas disponíveis. Para saber quem fez o pacote e como devemos cita-lo em trabalhos acadêmicos, basta usar ``citation()``.
+
+```{R}
+citation("rootSolve")
+```
+
+Agora vamos cobrir alguns aspectos básicos da sintaxe do R.
+
+# Uma calculadora potente
+
+A maneira mais simples de pensar no R é como uma calculadora. Observe que podemos usar ``#`` para fazer comentários no código, isso é útil para deixar tudo mais legível.
+
+```{R}
+
+2 + 2 # soma simples
+
+2 - 1 # subtração
+
+2^3 # elevar ao cubo
+
+2*3 #multiplicação
+
+-2*3 # multiplicação por um negativo
+
+2**3 # forma alternativa de elevar à potências
+
+```
+
+Também podemos fazer testes lógicos usando o ``==`` para igual ou ``!=`` para diferente. 
+
+```{R}
+
+2 + 2 == 4 # testando se 2 + 2 = 4
+
+2 + 2 != 4 # agora se é diferente
+
+2 + 2 > 3 # maior
+
+2 + 2 < 3 # menor
+
+TRUE == FALSE # podemos também testar proposições lógicas mais abstratas
+
+```
+
+No entanto, a maior parte do tempo lidaremos com _objetos_, que iremos definir com o sinal ``<-``, que chamamos de Operador de Designação (Assignment Operator). Se parecer muito estranho digitar isso, o atalho é ``Alt`` + ``-``. Você também pode usar o sinal ``=``, ele vai funcionar quase sempre como um sinônimo, mas talvez possa te confundir se estiver fazendo testes lógicos. Use com cuidado.
+
+```{R}
+
+a = 2 # definindo um objeto a como 2
+b <- 2 # o mesmo com b, usando o sinal <-
+
+a == b # teste lógico
+
+```
+
+Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação. Algumas funções são simples o suficiente para que você não precisa dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da funçaõ.
+
+```{R}
+help(seq)
+
+print(a) # retorna no console o valor de a
+
+exp(4) # exponencial
+
+factorial(4) #fatorial
+
+choose(4, 2) #permutação
+
+seq(from = 1,
+    to = 10, 
+    by = 2) #sequência de-para com passo 2
+
+seq(1, 10, 2) # o mesmo resultado sem especificar qual argumento é qual
+
+c = seq(1, 5, 1) # agora com um passo 1
+print(c)
+```
+
+Observe que o objeto ``c`` é um pouco diferente dos anteriores, que eram só um número. ``c`` tem uma sequência. Para descobrir a classe de um objeto, usamos a função ``class()`` e para inspeciona-lo melhor usar ``str()`` (uma abreviação de estrutura em inglês).
+
+```{R}
+
+class(a)
+str(a)
+
+class(c)
+str(c)
+
+```
+
+Ambos são objetos de classe "numeric", mas existem outras. Uma das estruturas de dados mais importantes do R são vetores. Podemos declarar vetores de várias formas, uma "simples" é usando a função ``c()``. Para saber se um objeto é vetor, podemos usar ``is.vector()``. Objetos podem ser nomeados com números, desde que não comecem com um número. Letras maísculas e minúsculas também fazem diferença.
+
+```{R}
+
+A = c(2,2) # A é um vetor de duas dimensões em que cada entrada é um 2
+
+print(A) # printamos no console
+class(A) # descobrimos a classe
+str(A) # inspecionamos a estrutura
+is.vector(A)
+
+```
+
+Vetores são estruturas de dados muito flexíveis, podemos armazenas de tudo neles. Um truque para se poupar de escrever muitos prints se precisar é escrever a linha de código toda entre parênteses. Como por exemplo:
+
+```{R}
+(B = c(2, -3, 5, 8))
+
+C = c("um", "dois", "madeira", "peixe", "PET-UFF", "Niterói")
+
+D = c(TRUE, FALSE, TRUE, FALSE, FALSE)
+
+```
+
+Operações com vetores são bem intuitivas no R porque a maioria das funções é vetorizada. Elas lembram muito como funcionam as operações em álgebra linear funcionam. A função ``ifelse()`` por exemplo - que deve lembrar aos usuários de Excell a função ``SE`` - também funciona no mesmo espírito. Basta especificarmos um teste lógico, uma resposta para verdadeiro e outra para falso.
+
+
+```{R}
+E = c(1, 3, 4, 9)
+
+F_ = B*E # multiplicação de vetores
+
+# nunca declare um objeto chamado F ou T porque são os símbolos de verdadeiro e falso
+
+B*E # podemos também somente recuperar a conta se não quisermos printar F_
+
+G = ifelse(C == "PET-UFF", # testa se cada entrada é igual a "PET-UFF"
+           "Entrada do PET", # resposta se for
+           "Não é a Entrada do PET") # resposta se não for
+print(G)
+
+```
+
+O próximo objeto são matrizes. Matrizes precisam de vetores do mesmo tipo para funcionar. Precisamos alimentar um vetor só e depois especificar quantas linhas e colunas queremos. Podemos pedir os autovalores e autovetores da matriz e também podemos multiplicar matrizes com ``%*%``. 
+
+```{R}
+
+H = c(1, 3, 2, 4) 
+
+I = matrix(H,        # vetor
+           nrow = 2, # número de linhas
+           ncol = 2) # número de colunas
+
+auto = eigen(I) #autovalores e autovetores da matriz
+print(auto)
+
+J = c(2, 1, 5, 3)
+
+K = matrix(J,
+           ncol = 2)
+
+I %*% K ## multiplicação de matrizes
+
+```
+
+A estrutura de dados mais comum é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()`` ou ``nrow()`` para averiguar isso.
+
+```{R, error = TRUE}
+
+elemento1 = seq(1, 100)
+elemento2 = seq(50, 150)
+
+length(elemento1)
+length(elemento2)
+
+base = data.frame(primeiro = elemento1,
+                  segundo = elemento2)
+
+```
+
+No entanto se fizermos ``elemento1`` e ``elemento2`` terem o mesmo comprimento, o DF sai sem problemas:
+
+```{R, error = TRUE}
+
+elemento1 = seq(1, 100)
+elemento2 = seq(50, 149)
+
+length(elemento1)
+length(elemento2)
+
+base = data.frame(primeiro = elemento1,
+                  segundo = elemento2)
+
+print(base)
+
+```
+
+Nos referimos aos elementos de um DF pelo símbolo ``$``. Então se quisermos resgatar somente o vetor ``primeiro``, no referimos a ``base$primeiro``. Isso também vale se quisermos criar mais vetores na base. Também podemos nos referir a elementos específicos usando chaves.
+
+```{R}
+base$terceiro = base$primeiro + base$segundo 
+
+mean(base$terceiro) # média
+median(base$primeiro) # mediana
+summary(base$segundo) # sumário estatístico
+
+base[1,2] # pega o elemento na primeira linha e segunda coluna
+base[1,] # pega a primeira linha
+
+
+```
+
+E também temos listas. São formas bem gerais de estruturas de dados, porque adimitem qualquer coisa. O primeiro elemento de uma lista pode ser um DF, o segundo um vetor e o terceiro uma letra.
+
+```{R}
+
+lista = list(primeiro = base,
+             segundo = seq(1, 10),
+             terceiro = "a")
+
+class(lista)
+str(lista)
+
+lista$terceiro
+
+```
+
+Lembra quando tiramos os autovalores de uma matriz? Salvamos eles no objeto ``auto``. Bem, como várias funções, ``eigen()`` retorna uma lista com elementos. Em particular, ``eigen()`` retorna um tipo particular de lista chamado _eigen_ em que a primeira entrada é um vetor com os autovalores e a segunda é uma matriz com os autovetores.
+
+```{R}
+auto$values
+
+auto$vectors
+
+```
+
+# Ambientes controlados
+
+
+
+
