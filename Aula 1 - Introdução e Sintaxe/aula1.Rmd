@@ -282,6 +282,8 @@ auto$vectors
 
 ```
 
+Antes de prosseguir para ambientes controlados, vamos parar para falar brevemente de Pastas de Trabalho. Elas são importantes porque vão facilitar demais a sua vida. Sempre que você precisar que o R leia um arquivo fora da pasta de trabalho, vai precisar dar o endereço *completo* dele, o que é chato, apesar de simples. Para definir um endereço de trabalho, é só coloca-lo entre aspas na função ``setwd()``. Para descobrir qual é o endereço atual, basta usar ``getwd()`` sem argumentos.
+
 # Ambientes controlados
 
 
