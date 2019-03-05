@@ -1,5 +1,5 @@
 ---
-title: "Aula 1 - Introdução e Sintaxe"
+title: "Primeiro Dia - Introdução e Sintaxe"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
 output: html_document
@@ -100,7 +100,7 @@ TRUE == FALSE # podemos também testar proposições lógicas mais abstratas
 
 ```
 
-No entanto, a maior parte do tempo lidaremos com _objetos_, que iremos definir com o sinal ``<-``, que chamamos de Operador de Designação (Assignment Operator). Se parecer muito estranho digitar isso, o atalho é ``Alt`` + ``-``. Você também pode usar o sinal ``=``, ele vai funcionar quase sempre como um sinônimo, mas talvez possa te confundir se estiver fazendo testes lógicos. Use com cuidado.
+No entanto, a maior parte do tempo lidaremos com _objetos_, que iremos definir com o sinal ``<-``, que chamamos de Operador de Designação (Assignment Operator). Se parecer muito estranho digitar isso, o atalho é ``Alt`` + ``-``. Você também pode usar o sinal ``=``, ele vai funcionar quase sempre como um sinônimo, mas talvez possa te confundir se estiver fazendo testes lógicos, então use com cuidado.
 
 ```{R}
 
@@ -113,16 +113,21 @@ a == b # teste lógico
 
 Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação. Algumas funções são simples o suficiente para que você não precisa dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da funçaõ.
 
-```{R}
+```{R, eval = FALSE}
+
 help(seq)
+
+```
+
+```{R}
 
 print(a) # retorna no console o valor de a
 
 exp(4) # exponencial
 
-factorial(4) #fatorial
+factorial(4) # fatorial
 
-choose(4, 2) #permutação
+choose(4, 2) # permutação de 4, 2 a 2
 
 seq(from = 1,
     to = 10, 
@@ -131,7 +136,11 @@ seq(from = 1,
 seq(1, 10, 2) # o mesmo resultado sem especificar qual argumento é qual
 
 c = seq(1, 5, 1) # agora com um passo 1
+
+1:5 # usar : também serve para gerar sequências com passo 1
 print(c)
+
+sum(c) # soma das entradas
 ```
 
 Observe que o objeto ``c`` é um pouco diferente dos anteriores, que eram só um número. ``c`` tem uma sequência. Para descobrir a classe de um objeto, usamos a função ``class()`` e para inspeciona-lo melhor usar ``str()`` (uma abreviação de estrutura em inglês).
@@ -146,7 +155,7 @@ str(c)
 
 ```
 
-Ambos são objetos de classe "numeric", mas existem outras. Uma das estruturas de dados mais importantes do R são vetores. Podemos declarar vetores de várias formas, uma "simples" é usando a função ``c()``. Para saber se um objeto é vetor, podemos usar ``is.vector()``. Objetos podem ser nomeados com números, desde que não comecem com um número. Letras maísculas e minúsculas também fazem diferença.
+Uma das estruturas de dados mais importantes do R são vetores. Podemos declarar vetores de várias formas, uma "simples" é usando a função ``c()``. Para saber se um objeto é vetor, podemos usar ``is.vector()``. Objetos podem ser nomeados com números, desde que não comecem com um número. Letras maísculas e minúsculas também fazem diferença.
 
 ```{R}
 
@@ -170,7 +179,16 @@ D = c(TRUE, FALSE, TRUE, FALSE, FALSE)
 
 ```
 
-Operações com vetores são bem intuitivas no R porque a maioria das funções é vetorizada. Elas lembram muito como funcionam as operações em álgebra linear funcionam. A função ``ifelse()`` por exemplo - que deve lembrar aos usuários de Excell a função ``SE`` - também funciona no mesmo espírito. Basta especificarmos um teste lógico, uma resposta para verdadeiro e outra para falso.
+Vale parar brevemente para falar de fatores. Até agora trabalhamos com dados lógicos ou numéricos, mas é muito comum encontrar dados categóricos como por exemplo sexo ou profissão. Esse tipo de vetor é melhor lidado quando é declarado como um fator. Isso é simples, basta usar a função ``factor()``. Esse tipo de classe é muito útil para rodar modelos com esse tipo de variável porque o R faz por nós o trabalho de criar variáveis dummy com cada classe e nos informa quais tipos foram observados. Digamos por exemplo que ``C2`` seja uma lista de extensções de que participam 10 alunos aleatoriamente escolhidos. 
+
+```{R}
+C2 = c("PET", "Atlética", "PET", "Goal", "Opção", "PET", "Opção", "Atlética", "Opção", "PET")
+C2 = factor(C2)
+
+C2
+```
+
+Operações com vetores são bem intuitivas no R porque a maioria das funções é vetorizada. Elas lembram em muito como as operações em álgebra linear funcionam. A função ``ifelse()`` por exemplo - que deve lembrar aos usuários de Excell a função ``SE`` - também funciona no mesmo espírito. Basta especificarmos um teste lógico, uma resposta para verdadeiro e outra para falso.
 
 
 ```{R}
@@ -279,13 +297,193 @@ Lembra quando tiramos os autovalores de uma matriz? Salvamos eles no objeto ``au
 auto$values
 
 auto$vectors
-
 ```
 
 Antes de prosseguir para ambientes controlados, vamos parar para falar brevemente de Pastas de Trabalho. Elas são importantes porque vão facilitar demais a sua vida. Sempre que você precisar que o R leia um arquivo fora da pasta de trabalho, vai precisar dar o endereço *completo* dele, o que é chato, apesar de simples. Para definir um endereço de trabalho, é só coloca-lo entre aspas na função ``setwd()``. Para descobrir qual é o endereço atual, basta usar ``getwd()`` sem argumentos.
 
 # Ambientes controlados
 
+Ambientes controlados são maneiras de organizar testes lógicos e ações a serem tomadas para resultados diferentes. Vamos cobrir as duas funções mais comuns, o loop ``for()`` e o ambiente ``if()`` e expandir um pouco nossa capacidade de fazer testes lógicos com os operadores E e OU.
+
+``2+2 == 4`` sempre irá retornar um verdadeiro, mas se testarmos se esse enunciado é verdadeiro conjuntamente com outro as garantias vão embora. Para juntar enunciados lógicos no R usando o conectivo E usamos a letra ``&``.
+
+```{R}
+
+2 + 2 == 4
+
+2 + 2 == 4 & 3 + 3 == 6 # uma verdadeira & uma verdadeira
+
+2 + 2 == 4 & 3 - 2 == -1 # uma verdadeira & uma falsa
+
+```
+
+Também podemos testar se uma ou outra são verdadeiras, nesse caso usamos a barra vertical ``|``, acionada com ``Shift + \``.
+
+```{R}
+
+2 + 2 == 4 | 3 + 3 == 6 # uma verdadeira ou uma verdadeira
+
+2 + 2 == 4 | 3 - 2 == -1 # uma verdadeira ou uma falsa
+
+```
+
+## O enunciado ``if``
+
+O enunciado ``if`` segue sempre a mesma estrutura:
+
+```{R, eval = FALSE}
+
+if(Condição == Verdadeira) {
+  
+  Expressão
+  
+  }
+```
+
+Digamos que temos um vetor com dados de vendas mensais e uma meta, poderíamos então fazer:
+
+```{R}
+
+meta = 200
+vendas_mensais = c(12, 15, 18, 25, 30, 16, 20, 12, 13, 15, 16, 22)
+
+if(sum(vendas_mensais) > meta) {
+  
+  print("Meta de vendas cumprida")
+
+  }
+
+```
+
+Podemos rebuscar um pouco isso usando funções como ``paste()`` que agrupa pedaços de texto e ``else`` para definir o que deve ser feito caso o teste lógico retorne Falso.
+
+```{R}
+
+if(sum(vendas_mensais) > meta) {
+  
+  diferenca = sum(vendas_mensais) - meta
+  
+  print(paste("Meta de vendas cumprida com margem de", diferenca))
+
+  } 
 
 
+```
+
+Agora com um ``else`` a estrutura é essencialmente a mesma:
+
+```{R, eval = FALSE}
+
+if(Condição == Verdadeira) {
+  
+  Expressão
+  
+} else {
+    
+  Expressão alternativa
+  
+  }
+```
+ 
+ Como por exemplo:
+
+```{R}
+
+if(sum(vendas_mensais) > meta) {
+  
+  diferenca = sum(vendas_mensais) - meta
+  
+  print(paste("Meta de vendas cumprida com margem de", diferenca))
+
+} else {
+  
+  diferenca = sum(vendas_mensais) - meta
+  
+  print(paste("Meta de vendas não foi cumprida, com diferença de", diferenca))  
+  
+  }
+
+
+```
+
+Observe que repetimos o cálculo da diferença dentro de cada opção. Isso é importante porque o que quer que esteja dentro das chaves só vai ser executado se o teste lógico retornar um resultado específico. Poderíamos definir também a diferença do lado de fora do ``if()`` para não precisarmos repetir.
+
+```{R}
+
+diferenca = sum(vendas_mensais) - meta
+
+if(sum(vendas_mensais) > meta) {
+  
+  print(paste("Meta de vendas cumprida com margem de", diferenca))
+
+} else {
+  
+  print(paste("Meta de vendas não foi cumprida, com diferença de", diferenca))  
+  
+  }
+```
+
+## O loop ``for()``
+
+Existem outras formas de loop, mas vamos por enquanto focar no mais útil, o loop for. Sempre usaremos loops for quando precisarmos realizar operações elemento por elemento. 
+
+Genericamente, um loop for tem a forma:
+
+```{R, eval = FALSE}
+
+for (i in Lista de índices) {
+  
+  Expressão(i)
+  
+  }
+
+
+```
+
+Se temos uma sequência numérica e queremos saber a soma acumulada até o i-ésimo elemento, basta montar um loop. Se der tudo certo o último elemento do vetor ``soma_acumulada`` será 5050.
+
+```{R}
+
+numeros = seq(1, 100)
+soma_acumulada = vector() # declaramos um vetor vazio
+
+for(i in 1:100) {
+  
+  soma_acumulada[i] = sum(numeros[1:i]) # preenchemos o vetor vazio
+  #numeros[1:i] pega todos os elementos de "numeros" entre o primeiro e o i-ésimo
+}
+
+print(soma_acumulada)
+
+```
+
+Observe que vários parâmetros do loop podem se adaptar automaticamente aos dados com um pouco de imaginação. Vamos acessar dados prontos com a função ``data()``. Mais especificamente a base iris, com dados de algumas espécies de flores. A função ``head()`` mostra as primeiras linhas da base para que tenhamos uma ideia do que ela mostra e como está estruturada.
+
+```{R}
+
+data(iris)
+
+head(iris)
+
+```
+
+Digamos que não saibamos quantas variáveis a base tem e queremos fazer um loop que diga a classe de todos os vetores. Lembre-se que para acessar elementos específicos de DataFrames e Listas não podemos usar só uma chave``[]``, precisamos usar duas ``[[]]``
+
+```{R}
+for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
+  
+  print(class(iris[[i]]))
+  
+}
+```
+
+# Exercícios
+
+
+
+
+
+# (Extra se der tempo em sala) Funções
+
+Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova usando a função ``function()``.
 
