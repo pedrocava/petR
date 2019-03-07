@@ -112,7 +112,7 @@ Vários pacotes de R trazem funcionalidades para importar dados de maneira mais 
 
 #### Brazilian Economic Time Series (BETS)
 
-o BETS extrai séries diretamente do SGS/BCB, basta alimentar um código específico da série. A função ``BETSsearch()`` permite fazer buscas, mas o código também pode ser manualmente localizado no site do SGS: https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries. 
+O BETS extrai séries diretamente do SGS/BCB, basta alimentar um código específico da série. A função ``BETSsearch()`` permite fazer buscas, mas o código também pode ser manualmente localizado no site do SGS: https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries. 
 
 Como spoiler: o código da série de variação mensal do IPCA é 433. Vamos importar uma série e gerar um gráfico. Não se preocupe se você ainda não sabe fazer gráficos no R. Vamos ver isso no próximo encontro - e aprenderemos a fazer gráficos muito mais bonitos.
 
@@ -120,13 +120,16 @@ Como spoiler: o código da série de variação mensal do IPCA é 433. Vamos imp
 ```{R}
 
 library(BETS)
+citation("BETS")
+
 BETSsearch(description = "ipca")
 
 ipca = BETSget(433)
 plot(ipca, 
      main = "Variação Mensal do IPCA, 1980-2019", 
      ylab = "%",
-     xlab = "Ano")
+     xlab = "Ano",
+     sub = "Dados do Banco Central do Brasil")
 
 ```
 
@@ -134,8 +137,9 @@ plot(ipca,
 
 O pacote ``electionsBR`` traz ferramentas para importar dados eleitorais do repositório do TSE. É uma boa ideia olhar a documentação do pacote porque cada tipo de eleição tem uma função própria. Como exemplo vou usar ``president_mun_vote()`` para baixar dados de eleição presidencial a nível de municípios.
 
-```{R}
+```{R, warning = FALSE, message = FALSE}
 library(electionsBR)
+citation("electionsBR")
 
 presidente = president_mun_vote(year = 2010)
 head(presidente)
@@ -154,5 +158,104 @@ head(presidente)
 
 
 # Simulando dados
+
+Para simular dados no R basta especificarmos uma distribuição probabilística. O pacote ``stats``, parte da Biblioteca Padrão, traz várias funções que cobrem todas as facetas das distribuições mais comuns, como a Normal, Poisson, binomial e exponencial. Distribuições mais exóticas como a Pareto II, Pareto IV, de Maddala e Lognormal Discreta estão disponíveis em pacotes como o ``VGAM`` e o ``extraDistr``. Para uma lista completa dos pacotes disponíveis com distribuições, é só acessar o CRAN TaskView de Distribuições Probabilísticas, disponível em: https://cran.r-project.org/web/views/Distributions.html.
+
+Funções relacionadas à distribuições sempre têm a mesma estrutura de nome: ``xfoo``, onde x é uma letra e foo é abreviação de alguma distribuição. As letras são, normalmente, ``d``, ``p``, ``q`` e ``r``, cada uma com um propósito específico.
+
+* Funções ``p`` devolvem a probabilidade acumulada de uma entrada. É a Função de Distribuição Acumulada. 
+* Funções ``q`` devolvem o quantil de uma probabilidade especificada. É a Função Inversa de Distribuição Acumulada.
+* Funções ``d`` devolvem a densidade da distribuição, a derivada da Função de Distribuição Acumulada.
+* Funções ``r`` (do inglês, _random_) devolvem um valor aleatório que segue a distribuição especificada.
+
+Algumas funções e suas abreviações:
+
+* ``norm`` para a Normal
+* ``pois`` para a Poisson
+* ``t`` para a T de Student
+* ``exp`` para a exponencial
+* ``gamma`` para a Gamma
+* ``f`` para a F de Fisher-Snedecor
+* ``unif`` para a Uniforme
+
+
+## Um pequeno aviso sobre geração de dados "aleatórios"
+
+É difícil fielmente gerar dados *aleatórios* porque sempre precisamos de algum processo gerador dos dados por trás. Esse assunto é um tanto quanto complexo, mas vale introduzir uma noção aqui de Semente Aleatória (Random Seed).
+
+Todo gerador pseudoaleatório de números precisa de um número inicial para começar. Chamamos esse número de Semente (Aleatória) ou de Seed. O R tem uma semente padrão, mas para garantir que nossos resultados não mudam entre uma sessão de trabalho e outra, é sempre de bom tom usar a função ``set.seed()`` para definir uma semente antes de começar a trabalhar e deixa-la em nossos scripts. O número em si não importa, pode ser 1, 123, 1001 ou 6516871651567416871. 
+
+Bons geradores pseudoaleatórios de números são pouco sensíveis à escolha da semente, só precisam de um número qualquer. É bom rodar seus modelos com 2 ou 3 sementes diferentes para verificar que seus resultados não estão aparecendo por conta da semente escolhida, mas isso tem como objetivo aliviar a consciência muito mais do que encontrar erros. É realmente difícil que uma semente específica introduza resultados muito peculiares. 
+
+Tenha em mente, no entanto, que um mesmo processo pseudoaleatório gera os mesmos dados se tiver a mesma semente. Em alguns momentos isso é interessante, em outros não. Vou dar dois exemplos:
+
+* Imagine que você está rodando alguns modelos de classificação de risco para uma seguradora. É importante garantir consistência sempre, então escolher a _mesma_ semente é uma boa prática, dado que você já testou o modelo com algumas sementes diferentes.
+
+* Imagine que você tem um bot de twitter que tweeta aleatoriamente pedaços de letras de um artista, escolhidas ao acaso de um banco de dados com letras desse artista. Para não repetir a mesma escolha sempre, é bom tornar o processo de escolher a semente aleatório. Um bom truque é usar a função ``Sys.time()``, que pega data e hora no momento em que é rodada, combinar com a função ``as.numeric()`` para transforma-la em um número e então dar esse número como semente aleatória.
+
+```{R}
+Sys.time()
+semente = as.numeric(Sys.time())
+print(semente)
+
+set.seed(as.numeric(Sys.time()))
+
+## ou alternativamente
+
+set.seed(semente)
+
+```
+
+É também importante ter em mente quais são os argumentos padrão das funções sendo usadas. A função ``rnorm``, por exemplo, tem por padrão média 0 e desvio-padrão unitário - porque essa é a Normal Padrão. Lembre-se de que as funções para simular distribuições no R sempre recebem como argumento o _desvio-padrão_, no argumento ``sd=`` e não a variância. Já as funções da distribuição Gamma aceitam duas fórmulas diferentes para a densidade da distribuição, então é importante ler a documentação para saber como conseguir a que você quer.
+
+```{r}
+
+## EXEMPLOS COM DISTRIBUIÇÕES DE PROBABILIDADE
+
+set.seed(1234) # semente definida
+
+pnorm(28, mean = 25, sd = sqrt(32)) # probabilidade acumulada do valor 28 numa distribuição N(25, 32)
+
+rnorm(n = 10) # 10 números aleatórios com distribuição de uma normal padrão
+
+rnorm(15, mean = 2, sd = 2) # 15 números aleatórios com distribuição de uma normal N(2, 4)
+ 
+qnorm(0.3, mean = 25, sd = sqrt(32)) # número com probabilidade acumulada de 30% em uma normal N(25, 32)
+
+dt(2, df = 10) # valor da densidade de uma t de Student com 10 graus de liberdade no 2
+
+punif(0, min = -1, max = 1) # probabilidade acumulada no 0 de uma U(-1, 1)
+
+```
+
+Podemos testar propriedades de dados para verificar se aderem à distribuições particulares com alguns testes estatísticos. Tome $X \~ N(2, 8)$. Vamos gerar uma amostra com $n = 2000$ que segue a distribuição $X$. Depois, vamos aplicar dois testes de hipótese muito comuns. O primeiro é o de Shapiro-Wilk, serve para testar normalidade e o outro é o de Kolmogorof-Smirnov, que serve para testar se dados de uma amostra aderem a uma distribuição contínua qualquer.
+
+```{R}
+
+X = rnorm(n = 2000,
+          mean = 2,
+          sd = sqrt(8))
+
+sd(X) # desvio-padrão dos dados
+var(X) # variância dos dados
+mean(X) # média dos dados
+sample(X, size = 7) # 7 elementos aleatoriamente escolhidos de X
+
+shapiro.test(X) # teste de Shapiro-Wilk de normalidade de dados
+
+ks.test(X, 
+        "pnorm", 
+        mean = 2, 
+        sd = sqrt(8)) # teste de Kolmogorov-Smirnov de Aderência
+```
+
+# Exercícios
+
+* Abra o arquivo ``exercicio1.Rds`` e teste se ele adere à uma distribuição t de Student com 5, 10 ou 15 graus de liberdade
+* Abra o arquivo ``exercicio2.Rds`` e teste se os dados aderem à uma Normal com média 0 e variância 10. 
+* Abra o arquivo ``exercicio3.dta`` e teste se os dados são normais.
+* $P(3 < Y < 30)$ dado que $Y \~ \text{Poisson}(8)$
+* Gere uma vetor $A \~ F(2, 4)$
+* Encontre o número $c$ tal que $P(Z>c) = 0.7$ e $Z \~ Gamma(1, 5)$
 
 
