@@ -295,6 +295,8 @@ a == b # teste lógico</code></pre>
 <pre><code>## [1] 54.59815</code></pre>
 <pre class="r"><code>factorial(4) # fatorial</code></pre>
 <pre><code>## [1] 24</code></pre>
+<pre class="r"><code>sqrt(9) # raiz quadrada</code></pre>
+<pre><code>## [1] 3</code></pre>
 <pre class="r"><code>choose(4, 2) # permutação de 4, 2 a 2</code></pre>
 <pre><code>## [1] 6</code></pre>
 <pre class="r"><code>seq(from = 1,
@@ -521,11 +523,132 @@ mean(base$terceiro) # média</code></pre>
 <pre class="r"><code>summary(base$segundo) # sumário estatístico</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   50.00   74.75   99.50   99.50  124.25  149.00</code></pre>
+<pre class="r"><code>rowMeans(base) # média de cada linha</code></pre>
+<pre><code>##   [1]  34.00000  35.33333  36.66667  38.00000  39.33333  40.66667  42.00000
+##   [8]  43.33333  44.66667  46.00000  47.33333  48.66667  50.00000  51.33333
+##  [15]  52.66667  54.00000  55.33333  56.66667  58.00000  59.33333  60.66667
+##  [22]  62.00000  63.33333  64.66667  66.00000  67.33333  68.66667  70.00000
+##  [29]  71.33333  72.66667  74.00000  75.33333  76.66667  78.00000  79.33333
+##  [36]  80.66667  82.00000  83.33333  84.66667  86.00000  87.33333  88.66667
+##  [43]  90.00000  91.33333  92.66667  94.00000  95.33333  96.66667  98.00000
+##  [50]  99.33333 100.66667 102.00000 103.33333 104.66667 106.00000 107.33333
+##  [57] 108.66667 110.00000 111.33333 112.66667 114.00000 115.33333 116.66667
+##  [64] 118.00000 119.33333 120.66667 122.00000 123.33333 124.66667 126.00000
+##  [71] 127.33333 128.66667 130.00000 131.33333 132.66667 134.00000 135.33333
+##  [78] 136.66667 138.00000 139.33333 140.66667 142.00000 143.33333 144.66667
+##  [85] 146.00000 147.33333 148.66667 150.00000 151.33333 152.66667 154.00000
+##  [92] 155.33333 156.66667 158.00000 159.33333 160.66667 162.00000 163.33333
+##  [99] 164.66667 166.00000</code></pre>
+<pre class="r"><code>colMeans(base) # média de cada coluna</code></pre>
+<pre><code>## primeiro  segundo terceiro 
+##     50.5     99.5    150.0</code></pre>
 <pre class="r"><code>base[1,2] # pega o elemento na primeira linha e segunda coluna</code></pre>
 <pre><code>## [1] 50</code></pre>
 <pre class="r"><code>base[1,] # pega a primeira linha</code></pre>
 <pre><code>##   primeiro segundo terceiro
 ## 1        1      50       51</code></pre>
+<pre class="r"><code>base[base$terceiro &gt; 30,] # pega só as linhas em que a variável terceiro é maior que 30, vale para outros testes lógicos </code></pre>
+<pre><code>##     primeiro segundo terceiro
+## 1          1      50       51
+## 2          2      51       53
+## 3          3      52       55
+## 4          4      53       57
+## 5          5      54       59
+## 6          6      55       61
+## 7          7      56       63
+## 8          8      57       65
+## 9          9      58       67
+## 10        10      59       69
+## 11        11      60       71
+## 12        12      61       73
+## 13        13      62       75
+## 14        14      63       77
+## 15        15      64       79
+## 16        16      65       81
+## 17        17      66       83
+## 18        18      67       85
+## 19        19      68       87
+## 20        20      69       89
+## 21        21      70       91
+## 22        22      71       93
+## 23        23      72       95
+## 24        24      73       97
+## 25        25      74       99
+## 26        26      75      101
+## 27        27      76      103
+## 28        28      77      105
+## 29        29      78      107
+## 30        30      79      109
+## 31        31      80      111
+## 32        32      81      113
+## 33        33      82      115
+## 34        34      83      117
+## 35        35      84      119
+## 36        36      85      121
+## 37        37      86      123
+## 38        38      87      125
+## 39        39      88      127
+## 40        40      89      129
+## 41        41      90      131
+## 42        42      91      133
+## 43        43      92      135
+## 44        44      93      137
+## 45        45      94      139
+## 46        46      95      141
+## 47        47      96      143
+## 48        48      97      145
+## 49        49      98      147
+## 50        50      99      149
+## 51        51     100      151
+## 52        52     101      153
+## 53        53     102      155
+## 54        54     103      157
+## 55        55     104      159
+## 56        56     105      161
+## 57        57     106      163
+## 58        58     107      165
+## 59        59     108      167
+## 60        60     109      169
+## 61        61     110      171
+## 62        62     111      173
+## 63        63     112      175
+## 64        64     113      177
+## 65        65     114      179
+## 66        66     115      181
+## 67        67     116      183
+## 68        68     117      185
+## 69        69     118      187
+## 70        70     119      189
+## 71        71     120      191
+## 72        72     121      193
+## 73        73     122      195
+## 74        74     123      197
+## 75        75     124      199
+## 76        76     125      201
+## 77        77     126      203
+## 78        78     127      205
+## 79        79     128      207
+## 80        80     129      209
+## 81        81     130      211
+## 82        82     131      213
+## 83        83     132      215
+## 84        84     133      217
+## 85        85     134      219
+## 86        86     135      221
+## 87        87     136      223
+## 88        88     137      225
+## 89        89     138      227
+## 90        90     139      229
+## 91        91     140      231
+## 92        92     141      233
+## 93        93     142      235
+## 94        94     143      237
+## 95        95     144      239
+## 96        96     145      241
+## 97        97     146      243
+## 98        98     147      245
+## 99        99     148      247
+## 100      100     149      249</code></pre>
 <p>E também temos listas. São formas bem gerais de estruturas de dados, porque adimitem qualquer coisa. O primeiro elemento de uma lista pode ser um DF, o segundo um vetor e o terceiro uma letra.</p>
 <pre class="r"><code>lista = list(primeiro = base,
              segundo = seq(1, 10),
@@ -687,10 +810,18 @@ head(iris)</code></pre>
 </div>
 <div id="exercicios" class="section level1">
 <h1>Exercícios</h1>
+<ul>
+<li>Gere um DataFrame que é uma “grade” 100x100</li>
+<li>Faça um loop para obter a média de todas as variáveis da base de dados <code>longley</code></li>
+<li>Ache a média de cada ano e de cada mês na base <code>AirPassengers</code></li>
+<li>A base <code>LifeCycleSavings</code> contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.</li>
+<li>A base <code>mtcars</code> contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.</li>
+</ul>
 </div>
 <div id="extra-se-der-tempo-em-sala-funcoes" class="section level1">
 <h1>(Extra se der tempo em sala) Funções</h1>
 <p>Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova usando a função <code>function()</code>.</p>
+<p>VOU TRABALHAR MAIS NISSO DEPOIS</p>
 </div>
 
 

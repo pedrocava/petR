@@ -518,10 +518,10 @@ head(presidente)</code></pre>
 <li><p>Imagine que você tem um bot de twitter que tweeta aleatoriamente pedaços de letras de um artista, escolhidas ao acaso de um banco de dados com letras desse artista. Para não repetir a mesma escolha sempre, é bom tornar o processo de escolher a semente aleatório. Um bom truque é usar a função <code>Sys.time()</code>, que pega data e hora no momento em que é rodada, combinar com a função <code>as.numeric()</code> para transforma-la em um número e então dar esse número como semente aleatória.</p></li>
 </ul>
 <pre class="r"><code>Sys.time()</code></pre>
-<pre><code>## [1] &quot;2019-03-07 19:17:51 -03&quot;</code></pre>
+<pre><code>## [1] &quot;2019-03-07 19:56:29 -03&quot;</code></pre>
 <pre class="r"><code>semente = as.numeric(Sys.time())
 print(semente)</code></pre>
-<pre><code>## [1] 1551997072</code></pre>
+<pre><code>## [1] 1551999390</code></pre>
 <pre class="r"><code>set.seed(as.numeric(Sys.time()))
 
 ## ou alternativamente
@@ -547,7 +547,7 @@ pnorm(28, mean = 25, sd = sqrt(32)) # probabilidade acumulada do valor 28 numa d
 <pre><code>## [1] 0.06114577</code></pre>
 <pre class="r"><code>punif(0, min = -1, max = 1) # probabilidade acumulada no 0 de uma U(-1, 1)</code></pre>
 <pre><code>## [1] 0.5</code></pre>
-<p>Podemos testar propriedades de dados para verificar se aderem à distribuições particulares com alguns testes estatísticos. Tome <span class="math inline">\(X \~ N(2, 8)\)</span>. Vamos gerar uma amostra com <span class="math inline">\(n = 2000\)</span> que segue a distribuição <span class="math inline">\(X\)</span>. Depois, vamos aplicar dois testes de hipótese muito comuns. O primeiro é o de Shapiro-Wilk, serve para testar normalidade e o outro é o de Kolmogorof-Smirnov, que serve para testar se dados de uma amostra aderem a uma distribuição contínua qualquer.</p>
+<p>Podemos testar propriedades de dados para verificar se aderem à distribuições particulares com alguns testes estatísticos. Tome <span class="math inline">\(X \sim N(2, 8)\)</span>. Vamos gerar uma amostra com <span class="math inline">\(n = 2000\)</span> que segue a distribuição <span class="math inline">\(X\)</span>. Depois, vamos aplicar dois testes de hipótese muito comuns. O primeiro é o de Shapiro-Wilk, serve para testar normalidade e o outro é o de Kolmogorof-Smirnov, que serve para testar se dados de uma amostra aderem a uma distribuição contínua qualquer.</p>
 <pre class="r"><code>X = rnorm(n = 2000,
           mean = 2,
           sd = sqrt(8))
@@ -585,9 +585,9 @@ sd(X) # desvio-padrão dos dados</code></pre>
 <li>Abra o arquivo <code>exercicio1.Rds</code> e teste se ele adere à uma distribuição t de Student com 5, 10 ou 15 graus de liberdade</li>
 <li>Abra o arquivo <code>exercicio2.Rds</code> e teste se os dados aderem à uma Normal com média 0 e variância 10.</li>
 <li>Abra o arquivo <code>exercicio3.dta</code> e teste se os dados são normais.</li>
-<li><span class="math inline">\(P(3 &lt; Y &lt; 30)\)</span> dado que <span class="math inline">\(Y \~ \text{Poisson}(8)\)</span></li>
-<li>Gere uma vetor <span class="math inline">\(A \~ F(2, 4)\)</span></li>
-<li>Encontre o número <span class="math inline">\(c\)</span> tal que <span class="math inline">\(P(Z&gt;c) = 0.7\)</span> e <span class="math inline">\(Z \~ Gamma(1, 5)\)</span></li>
+<li><span class="math inline">\(P(3 &lt; Y &lt; 30)\)</span> dado que <span class="math inline">\(Y \sim \text{Poisson}(8)\)</span></li>
+<li>Gere uma vetor <span class="math inline">\(A \sim F(2, 4)\)</span></li>
+<li>Encontre o número <span class="math inline">\(c\)</span> tal que <span class="math inline">\(P(Z&gt;c) = 0.7\)</span> e <span class="math inline">\(Z \sim Gamma(1, 5)\)</span></li>
 </ul>
 </div>
 

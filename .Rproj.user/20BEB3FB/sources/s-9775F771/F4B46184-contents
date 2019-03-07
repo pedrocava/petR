@@ -499,7 +499,7 @@ Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe qu
 VOU TRABALHAR MAIS NISSO DEPOIS
 
 
-```{R}
+```{R, eval = FALSE, echo = FALSE}
 
 mensagem = function(){
   print("Adoro Métodos Computacionais II")
