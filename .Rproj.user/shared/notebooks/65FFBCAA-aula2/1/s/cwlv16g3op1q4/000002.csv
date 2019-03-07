@@ -1,0 +1,14 @@
+"0","link = ""https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true""
+temporario = tempfile()
+download.file(link, destfile = temporario, mode = ""wb"")
+"
+"2","trying URL 'https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true'
+"
+"2","Content type 'application/octet-stream'"
+"2"," length 3831265 bytes (3.7 MB)
+"
+"2","downloaded 3.7 MB
+
+"
+"0","RAIS_acre = readRDS(temporario)"
+"0","head(RAIS_acre)"

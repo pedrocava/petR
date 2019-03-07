@@ -490,8 +490,6 @@ for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
 
 
 
-
-
 # (Extra se der tempo em sala) Funções
 
 Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova usando a função ``function()``.
