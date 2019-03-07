@@ -269,9 +269,12 @@ base$terceiro = base$primeiro + base$segundo
 mean(base$terceiro) # média
 median(base$primeiro) # mediana
 summary(base$segundo) # sumário estatístico
+rowMeans(base) # média de cada linha
+colMeans(base) # média de cada coluna
 
 base[1,2] # pega o elemento na primeira linha e segunda coluna
 base[1,] # pega a primeira linha
+base[base$terceiro > 30,] # pega só as linhas em que a variável terceiro é maior que 30, vale para outros testes lógicos 
 
 
 ```
@@ -478,6 +481,12 @@ for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
 ```
 
 # Exercícios
+
+* Gere um DataFrame que é uma "grade" 100x100 
+* Faça um loop para obter a média de todas as variáveis da base de dados ``longley``
+* Ache a média de cada ano e de cada mês na base ``AirPassengers``
+* A base ``LifeCycleSavings`` contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.
+* A base ``mtcars`` contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.
 
 
 
