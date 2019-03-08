@@ -518,10 +518,10 @@ head(presidente)</code></pre>
 <li><p>Imagine que você tem um bot de twitter que tweeta aleatoriamente pedaços de letras de um artista, escolhidas ao acaso de um banco de dados com letras desse artista. Para não repetir a mesma escolha sempre, é bom tornar o processo de escolher a semente aleatório. Um bom truque é usar a função <code>Sys.time()</code>, que pega data e hora no momento em que é rodada, combinar com a função <code>as.numeric()</code> para transforma-la em um número e então dar esse número como semente aleatória.</p></li>
 </ul>
 <pre class="r"><code>Sys.time()</code></pre>
-<pre><code>## [1] &quot;2019-03-07 19:56:29 -03&quot;</code></pre>
+<pre><code>## [1] &quot;2019-03-08 17:09:57 -03&quot;</code></pre>
 <pre class="r"><code>semente = as.numeric(Sys.time())
 print(semente)</code></pre>
-<pre><code>## [1] 1551999390</code></pre>
+<pre><code>## [1] 1552075798</code></pre>
 <pre class="r"><code>set.seed(as.numeric(Sys.time()))
 
 ## ou alternativamente
@@ -582,12 +582,12 @@ sd(X) # desvio-padrão dos dados</code></pre>
 <div id="exercicios" class="section level1">
 <h1>Exercícios</h1>
 <ul>
-<li>Abra o arquivo <code>exercicio1.Rds</code> e teste se ele adere à uma distribuição t de Student com 5, 10 ou 15 graus de liberdade</li>
+<li>Abra o arquivo <code>exercicio1.Rds</code> e teste se ele adere à uma distribuição t de Student com 5, 10 ou 15 graus de liberdade.</li>
 <li>Abra o arquivo <code>exercicio2.Rds</code> e teste se os dados aderem à uma Normal com média 0 e variância 10.</li>
 <li>Abra o arquivo <code>exercicio3.dta</code> e teste se os dados são normais.</li>
-<li><span class="math inline">\(P(3 &lt; Y &lt; 30)\)</span> dado que <span class="math inline">\(Y \sim \text{Poisson}(8)\)</span></li>
-<li>Gere uma vetor <span class="math inline">\(A \sim F(2, 4)\)</span></li>
-<li>Encontre o número <span class="math inline">\(c\)</span> tal que <span class="math inline">\(P(Z&gt;c) = 0.7\)</span> e <span class="math inline">\(Z \sim Gamma(1, 5)\)</span></li>
+<li><span class="math inline">\(P(3 &lt; Y &lt; 30)\)</span> dado que <span class="math inline">\(Y \sim \text{Poisson}(8)\)</span>.</li>
+<li>Gere uma amostra com <span class="math inline">\(n=500\)</span> da variável <span class="math inline">\(A \sim F(2, 4)\)</span>.</li>
+<li>Encontre o número <span class="math inline">\(c\)</span> tal que <span class="math inline">\(P(Z&gt;c) = 0.7\)</span> e <span class="math inline">\(Z \sim Gamma(1, 5)\)</span>.</li>
 </ul>
 </div>
 
