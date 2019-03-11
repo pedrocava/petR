@@ -389,6 +389,23 @@ I %*% K ## multiplicação de matrizes</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    4   11
 ## [2,]   10   27</code></pre>
+</div>
+<div id="exercicios" class="section level1">
+<h1>Exercícios</h1>
+<ul>
+<li>Calcule <span class="math inline">\(52e^2 - 35 \times 4!\)</span></li>
+<li>Ache, se existirem, os autovetores da matriz: <span class="math display">\[A = \begin{bmatrix}
+1&amp;2&amp;5\\
+0&amp;3&amp;1\\
+2&amp;4&amp;3\\
+\end{bmatrix}\]</span></li>
+<li>Ache a transposta de <span class="math inline">\(A\)</span></li>
+<li>Calcule a soma dos autovalores da matriz <span class="math inline">\(A\)</span>.</li>
+<li>Calcule a média de uma sequência começando em <span class="math inline">\(150\)</span>, terminando em <span class="math inline">\(500\)</span>, com passo <span class="math inline">\(0,5\)</span></li>
+</ul>
+</div>
+<div id="data-frames" class="section level1">
+<h1>Data Frames</h1>
 <p>A estrutura de dados mais comum é um Data Frame. Usamos a função <code>data.frame()</code> para gera-los. Um DF é uma coleção de vetores que admite tipos <em>diferentes</em>, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o <em>mesmo</em> comprimento. Podemos usar a função <code>length()</code> ou <code>nrow()</code> para averiguar isso.</p>
 <pre class="r"><code>elemento1 = seq(1, 100)
 elemento2 = seq(50, 150)
@@ -808,7 +825,7 @@ head(iris)</code></pre>
 ## [1] &quot;factor&quot;</code></pre>
 </div>
 </div>
-<div id="exercicios" class="section level1">
+<div id="exercicios-1" class="section level1">
 <h1>Exercícios</h1>
 <ul>
 <li>Gere um DataFrame que é uma “grade” 100x100</li>
@@ -817,11 +834,6 @@ head(iris)</code></pre>
 <li>A base <code>LifeCycleSavings</code> contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.</li>
 <li>A base <code>mtcars</code> contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.</li>
 </ul>
-</div>
-<div id="extra-se-der-tempo-em-sala-funcoes" class="section level1">
-<h1>(Extra se der tempo em sala) Funções</h1>
-<p>Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova usando a função <code>function()</code>.</p>
-<p>VOU TRABALHAR MAIS NISSO DEPOIS</p>
 </div>
 
 

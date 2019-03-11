@@ -1,0 +1,70 @@
+---
+title: "Parte Extra de Funções"
+author: "Pedro Cavalcante"
+date: "11 de março de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# (Extra se der tempo em sala) Funções
+
+Grande parte da rotina de analisar dados é um tanto quanto repetida. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova usando a função ``function()``.
+
+VOU TRABALHAR MAIS NISSO DEPOIS
+
+
+```{R, eval = FALSE}
+
+mensagem = function(){
+  print("Adoro Métodos Computacionais II")
+}
+
+#evocando a função
+mensagem()
+
+soma.minha = function(x, y){
+  valor = x + y
+  return(valor)
+}
+
+soma.minha(2,4)
+soma.minha(2,"h")
+
+#Melhorando a função
+
+soma.minha = function(x,y){
+  if(class(x) != "numeric" | !is.numeric(y)){
+    print("Você deve inserir dois números para que a função possa ser executada!")
+  }else{
+    valor = x + y
+    return(valor)    
+  }
+}
+
+soma.minha(2,"h")
+
+###argumentos com padrão
+
+potencia = function(x,base = 10){
+  valor = base^x
+  return(valor)
+}
+
+potencia(3)
+
+funcao.estranha <- function(y) {
+  
+  if(y > 0){
+    return(3*exp(-3*y))
+  }
+    {0}
+    }
+
+funcao.estranha(2)  
+funcao.estranha(-5)
+
+```
+
