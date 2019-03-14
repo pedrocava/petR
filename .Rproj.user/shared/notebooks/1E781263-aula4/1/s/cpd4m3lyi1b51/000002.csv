@@ -1,0 +1,8 @@
+"0","wage2$completo = complete.cases(wage2) # vetor dizendo se a observação é completa
+wage2 = wage2[wage2$completo == TRUE,]
+wage2$separador = runif(n = nrow(wage2), min = 0, max = 1)
+treino = wage2[wage2$separador < .75]
+"
+"2","Error in `[.data.frame`(wage2, wage2$separador < 0.75) : 
+  undefined columns selected
+"
