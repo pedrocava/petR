@@ -1,0 +1,29 @@
+---
+title: "Quinto Dia - Atividade Prática"
+author: "Pedro Cavalcante"
+date: "15 de março de 2019"
+output: html_document
+---
+
+A atividade final é um trabalho aplicado que espero vá unir todas as habilidades adquiridas até aqui, vamos replicar artigos publicados. Abaixo segue uma lista de opções interessantes de trabalhos aplicados.
+
+* [Incentivizing Safer Sexual Behavior: Evidence from a Lottery Experiment on HIV Prevention](https://www.aeaweb.org/articles?id=10.1257/app.20160469)
+
+Resumo: We investigate the effect of a financial lottery program in Lesotho with relatively low expected payments but a chance to win a high prize conditional on negative test results for sexually transmitted infections. The intervention resulted in a 21.4 percent reduction in HIV incidence over two years. Lottery incentives appear to be particularly effective in targeting individuals with ex ante risky sexual behavior, consistent with the hypothesis that lotteries are more valued by individuals willing to take risks.
+
+* [Busting the “Princelings”: The Campaign Against Corruption in China’s Primary Land Market](https://academic.oup.com/qje/article/134/1/185/5140154#129773380)
+
+Resumo: Using data on over a million land transactions during 2004–2016 where local governments are the sole seller, we find that firms linked to members of China's supreme political elites—the Politburo—obtained a price discount ranging from 55.4% to 59.9% compared with those without the same connections. These firms also purchased slightly more land. In return, the provincial party secretaries who provided the discount to these “princeling” firms are 23.4% more likely to be promoted to positions of national leadership. To curb corruption, President Xi Jinping stepped up investigations and strengthened personnel control at the province level. Using a spatially matched sample (e.g., within a 500-meter radius), we find a reduction in corruption of between 42.6% and 31.5% in the provinces either targeted by the central inspection teams or whose party secretary was replaced by one appointed by Xi. Accordingly, this crackdown on corruption has also significantly reduced the promotional prospects of those local officials who rely on supplying a discount to get ahead.
+
+* [The Causal Effect of Competition on Prices and Quality: Evidence from a Field Experiment](https://www.aeaweb.org/articles?id=10.1257/app.20150310)
+
+Resumo: This paper provides experimental evidence on the effect of increased competition on prices and quality in the retail sector. We randomized the entry of 61 firms into 72 markets serving the beneficiaries of a conditional cash transfer program in the Dominican Republic. Six months after the intervention entry into the market led to reductions in prices ranging from 2 to 6 percent and to a statistically significant improvement in self-reported service quality. Prices dropped more in areas where the number of entrants was larger. Competition seems to have driven part of the clientele away from incumbent retailers.
+
+* [Partners in Crime](https://www.aeaweb.org/articles?id=10.1257/app.20170249)
+
+Resumo: Social interactions may explain the large variance in criminal activity across neighborhoods and time. We present direct evidence of social spillovers in crime using random variation in neighborhood residence along opposite sides of a newly drawn school boundary. We first show evidence for agglomeration effects—within small neighborhood areas, grouping more disadvantaged students together in the same school increases total crime. We then show that these youths are more likely to be arrested for committing crimes together—to be "partners in crime". Our results show that neighborhood and school segregation increase crime by fostering social interactions between at-risk youth.
+
+* [The Effect of Pollution on Worker Productivity: Evidence from Call Center Workers in China](https://www.aeaweb.org/articles?id=10.1257/app.20160436)
+
+Resumo: We investigate the effect of pollution on worker productivity in the service sector by focusing on two call centers in China. Using precise measures of each worker's daily output linked to daily measures of pollution and meteorology, we find that higher levels of air pollution decrease worker productivity. These results manifest themselves at levels of pollution commonly found in large cities throughout the developing and developed world.
+
