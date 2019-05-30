@@ -2,7 +2,9 @@
 title: "Primeiro Dia - Introdução e Sintaxe"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -499,11 +501,73 @@ for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
 
 # Exercícios
 
-* Gere um DataFrame que é uma "grade" 100x100 
+* Gere um DataFrame que é uma "grade" 100x100. Você terá então um DataFrame com 100*100 linhas e duas colunas, cada uma representando uma coordenada de um espaço de duas dimensões. Mais explicitamente, a primeira coluna terá cem vezes o número 1, cem vezes o número 2 e assim em diante, com a segunda tendo cem vezes a sequência de 1 a 100.
 * Faça um loop para obter a média de todas as variáveis da base de dados ``longley``
-* Ache a média de cada ano e de cada mês na base ``AirPassengers``
 * A base ``LifeCycleSavings`` contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.
 * A base ``mtcars`` contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.
+
+
+# (Extra) Criação de funções
+
+Grande parte da rotina de analisar dados é um tanto quanto repetitiva. Observe que comandos muito frequentes como loops e gerar sequências têm funções prontas. Sempre que encararmos uma atividade repetida, é uma boa ideia criar uma função nova automizando seu procedimento repetido usando ``function()``. Declaramos um objeto com um nome e a ele passamos a chamada dessa função primordial. Os argumentos de ``function()`` são justamente os argumentos da função que você está criando, e com certa flexibilidade. Algumas funções muito simples sequer precisam de argumentos, como ``getwd()`` por exemplo. 
+
+```{R}
+
+mensagem = function(){
+  print("Insira aqui uma frase motivacional")
+}
+
+#evocando a função
+mensagem()
+```
+
+Podemos fazer funções que dependam de argumentos a serem totalmente especificados. Como normalmente isso envolve algum tipo de manipulação e solução de algoritimo, queremos devolver ao usuário a solução disso. Usamos a função ``return()`` para isso.
+
+```{R, error = TRUE}
+
+soma.minha = function(x, y){
+  valor = x + y
+  return(valor)
+}
+
+soma.minha(2,4)
+soma.minha(2,"h")
+```
+
+Funções, assim como código normal, aceitam controle de fluxo e isso é muito útil para lidar com possíveis erros cometidos pelo usuário. Existem alguns pormenores aqui como por exemplo as funções ``stop()``, ``message()``, ``warning()`` e ``print()`` ou sutilezas como a diferença entre ``library()`` e ``require()`` ou mesmo ``require.Namespace()``. Caso vá escrever funções que serão usadas por mais gente, é importante se informar sobre essas detalhes mais finos. Uma boa fonte é o livro Advanced R de Hadley Wickham.
+
+```{R}
+
+soma.minha = function(x,y){
+  if(!is.numeric(x) | !is.numeric(y)){
+    print("Você deve inserir dois números para que a função possa ser executada")
+  }else{
+    valor = x + y
+    return(valor)    
+  }
+}
+
+soma.minha(2,"h")
+
+```
+
+Alguns argumentos não precisam ser especificados *sempre*. Lidando com dados, estamos quase sempre interessados em alguns limiares de significância por exemplo, ou quando vamos trabalhar quase sempre com uma certa taxa de erro aceitável.  Para isso especificamos valores padrão para argumentos.
+
+```{R}
+
+###argumentos com padrão
+
+potencia = function(x, base = 10){
+  valor = base^x
+  return(valor)
+}
+
+potencia(3)
+
+
+
+```
+
 
 
 
