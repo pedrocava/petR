@@ -2,12 +2,25 @@
 title: "Segundo Dia - Importando e Simulando Dados"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 Agora que cobrimos a sintaxe básica e sabemos conversar com o R, podemos realmente *fazer* coisas. Hoje o foco será em obter dados. Vamos aprender a importar dados de fontes variadas, baixar da internet e cobrir alguns pacotes que baixam dados estruturados de fontes como o Sistema Gerador de Séries do Banco Central do Brasil, Datasus e o Sidra do IBGE. Depois vamos aprender a gerar dados que seguem distribuições probabilísticas e estimar distribuições com dados reais.
 
 # Importando dados
+
+#### Uma nota cautelar
+
+Quando este material foi planejado originalmente, ainda não existia o pacote ``rio``. A seguir se segue uma explicação razoavelmente detalhada de como usar os pacotes ``readr``, ``haven`` e ``foreign`` para ler dados das mais diversas fontes. Isso tudo pode ser facilmente substituído pela função ``import()`` do pacote ``rio``. Basta por entre aspas o endereço do arquivo como argumento e pronto.
+
+```{R}
+library(rio)
+baseteste = import("exercicio3.dta")
+```
+
+Se você quer ter contato com pacotes que te permitem entender melhor o processo de importação de dados, é uma boa ideia ler a seção seguinte. Se não, recomendo pular diretamente para a seção de simulação de dados ou para a seção de importação de dados da internet.
 
 Antes de prosseguirmos é importante garantir que todas as bases de exemplos estejam baixadas e juntas numa pasta só para evitar confusões e facilitar nosso trabalho. Mais ainda, é bom garantir que essa pasta seja a pasta de trabalho com a função ``setwd()``. Para descobrir a pasta de trabalho atual e/ou verificar se está tudo certo, basta rodar ``getwd()``.
 

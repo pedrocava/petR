@@ -3,8 +3,8 @@ title: "Primeiro Dia - Introdução e Sintaxe"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,11 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 R é uma linguagem de programação voltada para estatística e análise de dados _open-source_, gratuita e de natureza colaborativa. Como vamos ver, o ambiente voltado para análise de dados facilita enormemente as tarefas do ciclo.
 
-![O ciclo da análise de dados](https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png)
+```{r, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("data-science.png")
+```
 
 Instalar o R é muito simples, ele está disponível em http://cran.r-project.org/. É importante depois instalar o RStudio, disponível em https://www.rstudio.org/, que é uma IDE (Integrated Development Enviroment). IDEs são progrmas que facilitam, e muito, programar porque trazem um ambiente gráfico mais intuitivo, disponibilizando informações como quais objetos estão carregados na memória do computador, visualização de gráficos e animações que fazemos e por aí vai. 
 
-![O ambiente do RStudio](http://www.sthda.com/sthda/RDoc/images/rstudio.png)
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("rstudio.png")
+```
 
 # Links importantes
 
