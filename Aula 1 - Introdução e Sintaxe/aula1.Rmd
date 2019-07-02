@@ -47,11 +47,9 @@ A fonte definitiva do R introdutório. É um livro em inglês muito extenso e de
 
 Tenha em mente que você pode anotar linhas de código na área do script e rodar linhas específicas copiando-as no console, digiando-as diretamente lá ou selecionando o trecho do script desejado e apertando ``ctrl + enter``.
 
-A grande vantagem do R é sua naturza colaborativa. Pesquisadores, programadores, profissionais e entusiastas do mundo todo escrevem *pacotes* com funcionalidades novas, que incluem coisas como ferramentas para econometria bayseana, gerar animaçãoes, estimar dinâmicas evolutivas, resolver problemas de otimização e gerir blogs. Pacotes tem nomes e eles trazem *funções* novas. Normalmente nos referimos a uma função na forma ``pacote::função`` ou ``função()``. Então se lemos ``dplyr::filter`` sabemos que é a função ``filter()`` do pacote ``dplyr``. 
+A grande vantagem do R é sua natureza colaborativa. Pesquisadores, programadores, profissionais e entusiastas do mundo todo escrevem *pacotes* com funcionalidades novas, que incluem coisas como ferramentas para econometria bayseana, gerar animaçãoes, estimar dinâmicas evolutivas, resolver problemas de otimização e gerir blogs. Pacotes tem nomes e eles trazem *funções* novas. Normalmente nos referimos a uma função na forma ``pacote::função`` ou ``função()``. Então se lemos ``dplyr::filter`` sabemos que é a função ``filter()`` do pacote ``dplyr``. 
 
-Alguns pacotes já vêm carregados no R, eles são o que chamamos de Biblioteca Padrão, a versão mais simples do R. Os mais importantes pacotes da BP são o ``base`` com toda a sintaxe básica da linguagem, o ``stats`` com dezenas de ferramentas estatísticas muito úteis e o ``utils`` com várias funções miscelâneas. 
-
-No entanto, a maioria dos pacotes não vem carregada no R diretamente. Eles estão sediados no que chamamos de Comprehensive R Archive Network (CRAN). Podemos instalar esses pacotes facilmente e depois é simples carrega-los. Vamos baixar o ``rootSolve``, que traz funções para resolver equações e problemas de cálculo diferencial.
+Alguns pacotes já vêm carregados no R, eles são o que chamamos de Biblioteca Padrão, a versão mais simples do R. Os mais importantes pacotes da BP são o ``base`` com toda a sintaxe básica da linguagem, o ``stats`` com dezenas de ferramentas estatísticas muito úteis e o ``utils`` com várias funções miscelâneas. No entanto, a maioria dos pacotes não vem carregada no R diretamente. Eles estão sediados no que chamamos de Comprehensive R Archive Network (CRAN). Podemos instalar esses pacotes facilmente e depois é simples carrega-los. Vamos baixar e carregar o ``rootSolve``, que traz funções para resolver equações e problemas de cálculo diferencial.
 
 ```{R, eval = FALSE}
 install.packages("rootSolve")
@@ -113,13 +111,15 @@ a == b # teste lógico
 
 ```
 
-Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação. Algumas funções são simples o suficiente para que você não precisa dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da funçaõ.
+Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação do texto. Algumas funções são simples o suficiente para que você não precise dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da funçaõ.
 
 ```{R, eval = FALSE}
 
 help(seq)
 
 ```
+
+Abaixo listo algumas funções com funcionalidades muito básicas como ``print()`` que retorna no console o valor de algum objeto, ``exp(x)`` que calcula $e^x$ e ``seq()`` para gerar sequências.
 
 ```{R}
 
@@ -145,9 +145,11 @@ c = seq(1, 5, 1) # agora com um passo 1
 print(c)
 
 sum(c) # soma das entradas
+
+mean(c) # média de c
 ```
 
-Observe que o objeto ``c`` é um pouco diferente dos anteriores, que eram só um número. ``c`` tem uma sequência. Para descobrir a classe de um objeto, usamos a função ``class()`` e para inspeciona-lo melhor usar ``str()`` (uma abreviação de estrutura em inglês).
+Observe que o objeto ``c`` é um pouco diferente dos anteriores, que eram só um número. ``c`` tem uma sequência. Para descobrir a classe de um objeto, usamos a função ``class()`` e para inspeciona-lo melhor usar ``str()`` (uma abreviação de _estrutura_ em inglês).
 
 ```{R}
 
@@ -159,7 +161,7 @@ str(c)
 
 ```
 
-Uma das estruturas de dados mais importantes do R são vetores. Podemos declarar vetores de várias formas, uma "simples" é usando a função ``c()``. Para saber se um objeto é vetor, podemos usar ``is.vector()``. Objetos podem ser nomeados com números, desde que não comecem com um número. Letras maísculas e minúsculas também fazem diferença.
+Uma das estruturas de dados mais importantes do R são *vetores*. Podemos declarar vetores de várias formas, uma "simples" é usando a função ``c()``. Para saber se um objeto é vetor, podemos usar ``is.vector()``. Objetos podem ser nomeados com números, desde que não comecem com um número. Letras maísculas e minúsculas são diferenciadas, então tenha isso em mente ao nomear objetos.
 
 ```{R}
 
@@ -183,16 +185,17 @@ D = c(TRUE, FALSE, TRUE, FALSE, FALSE)
 
 ```
 
-Vale parar brevemente para falar de fatores. Até agora trabalhamos com dados lógicos ou numéricos, mas é muito comum encontrar dados categóricos como por exemplo sexo ou profissão. Esse tipo de vetor é melhor lidado quando é declarado como um fator. Isso é simples, basta usar a função ``factor()``. Esse tipo de classe é muito útil para rodar modelos com esse tipo de variável porque o R faz por nós o trabalho de criar variáveis dummy com cada classe e nos informa quais tipos foram observados. Digamos por exemplo que ``C2`` seja uma lista de extensções de que participam 10 alunos aleatoriamente escolhidos. 
+Vale parar brevemente para falar de fatores. Até agora trabalhamos com dados lógicos ou numéricos, mas é muito comum encontrar dados categóricos como por exemplo sexo ou profissão. É mais simples lidar com esse tipo de dado quando é declarado como um fator. Isso é simples, basta usar a função ``factor()``. Esse tipo de classe é muito útil para rodar modelos com variáveis categóricas porque o R faz por nós o trabalho de criar variáveis dummy com cada classe e nos informa quais tipos foram observados. Para lidar com fatores também é comum usar ``levels()``, que retorna os tipos encontrados no vetor. Digamos por exemplo que ``C2`` seja uma lista de extensções de que participam 10 alunos aleatoriamente escolhidos. 
 
 ```{R}
 C2 = c("PET", "Atlética", "PET", "Goal", "Opção", "PET", "Opção", "Atlética", "Opção", "PET")
 C2 = factor(C2)
 
 C2
+levels(C2)
 ```
 
-Operações com vetores são bem intuitivas no R porque a maioria das funções é vetorizada. Elas lembram em muito como as operações em álgebra linear funcionam. A função ``ifelse()`` por exemplo - que deve lembrar aos usuários de Excell a função ``SE`` - também funciona no mesmo espírito. Basta especificarmos um teste lógico, uma resposta para verdadeiro e outra para falso.
+Operações com vetores são bem intuitivas no R porque a maioria das funções é vetorizada - são aplicadas à todos os elementos de um vetor. A função ``ifelse()`` por exemplo - que deve lembrar aos usuários de Excell a função ``SE`` - também funciona no mesmo espírito. Basta especificarmos um teste lógico, uma resposta para verdadeiro e outra para falso.
 
 
 ```{R}
@@ -249,7 +252,7 @@ I %*% K ## multiplicação de matrizes
 
 # Data Frames
 
-A estrutura de dados mais comum é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()`` ou ``nrow()`` para averiguar isso.
+A estrutura de dados mais comum é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()``  para averiguar isso.
 
 ```{R, error = TRUE}
 
@@ -264,7 +267,7 @@ base = data.frame(primeiro = elemento1,
 
 ```
 
-No entanto se fizermos ``elemento1`` e ``elemento2`` terem o mesmo comprimento, o DF sai sem problemas:
+No entanto se fizermos ``elemento1`` e ``elemento2`` terem o mesmo comprimento, o DF sai sem problemas. A função ``head()`` puxa o cabeçalho de um objeto e é muito útil para averiguar visualmente se está tudo como esperado.
 
 ```{R, error = TRUE}
 
@@ -277,11 +280,11 @@ length(elemento2)
 base = data.frame(primeiro = elemento1,
                   segundo = elemento2)
 
-print(base)
+head(base)
 
 ```
 
-Nos referimos aos elementos de um DF pelo símbolo ``$``. Então se quisermos resgatar somente o vetor ``primeiro``, no referimos a ``base$primeiro``. Isso também vale se quisermos criar mais vetores na base. Também podemos nos referir a elementos específicos usando chaves.
+Nos referimos aos elementos de um DF pelo símbolo ``$``. Então se quisermos resgatar somente o vetor ``primeiro``, usamos ``base$primeiro``. Isso também vale se quisermos criar mais vetores na base. Também podemos nos referir a elementos específicos usando chaves.
 
 ```{R}
 base$terceiro = base$primeiro + base$segundo 
@@ -501,7 +504,7 @@ for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
 
 # Exercícios
 
-* Gere um DataFrame que é uma "grade" 100x100. Você terá então um DataFrame com 100*100 linhas e duas colunas, cada uma representando uma coordenada de um espaço de duas dimensões. Mais explicitamente, a primeira coluna terá cem vezes o número 1, cem vezes o número 2 e assim em diante, com a segunda tendo cem vezes a sequência de 1 a 100.
+* Gere um DataFrame que é uma "grade" 100x100. Você terá então um DataFrame com 100 x 100 linhas e duas colunas, cada uma representando uma coordenada de um espaço de duas dimensões. Mais explicitamente, a primeira coluna terá cem vezes o número 1, cem vezes o número 2 e assim em diante, com a segunda tendo cem vezes a sequência de 1 a 100.
 * Faça um loop para obter a média de todas as variáveis da base de dados ``longley``
 * A base ``LifeCycleSavings`` contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.
 * A base ``mtcars`` contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.
