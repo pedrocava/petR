@@ -115,7 +115,7 @@ a == b # teste lógico
 
 ```
 
-Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação do texto. Algumas funções são simples o suficiente para que você não precise dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da funçaõ.
+Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação do texto. Algumas funções são simples o suficiente para que você não precise dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da função.
 
 ```{R, eval = FALSE}
 
