@@ -3,8 +3,8 @@ title: "Primeiro Dia - Introdução e Sintaxe"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -104,7 +104,7 @@ TRUE == FALSE # podemos também testar proposições lógicas mais abstratas
 
 ```
 
-No entanto, a maior parte do tempo lidaremos com _objetos_, que iremos definir com o sinal ``<-``, que chamamos de Operador de Designação (Assignment Operator). Se parecer muito estranho digitar isso, o atalho é ``Alt`` + ``-``. Você também pode usar o sinal ``=``, ele vai funcionar quase sempre como um sinônimo, mas talvez possa te confundir se estiver fazendo testes lógicos, então use com cuidado.
+No entanto, a maior parte do tempo lidaremos com _objetos_, que iremos definir com o sinal ``<-``, que chamamos de Operador de Designação (Assignment Operator). Se parecer muito estranho digitar isso, o atalho é ``Alt`` + ``-``. 
 
 ```{R}
 
@@ -143,7 +143,7 @@ seq(from = 1,
 
 seq(1, 10, 2) # o mesmo resultado sem especificar qual argumento é qual
 
-c = seq(1, 5, 1) # agora com um passo 1
+c <- seq(1, 5, 1) # agora com um passo 1
 
 1:5 # usar : também serve para gerar sequências com passo 1
 print(c)
@@ -169,7 +169,7 @@ Uma das estruturas de dados mais importantes do R são *vetores*. Podemos declar
 
 ```{R}
 
-A = c(2,2) # A é um vetor de duas dimensões em que cada entrada é um 2
+A <- c(2,2) # A é um vetor de duas dimensões em que cada entrada é um 2
 
 print(A) # printamos no console
 class(A) # descobrimos a classe
@@ -178,22 +178,22 @@ is.vector(A)
 
 ```
 
-Vetores são estruturas de dados muito flexíveis, podemos armazenas de tudo neles. Um truque para se poupar de escrever muitos prints se precisar é escrever a linha de código toda entre parênteses. Como por exemplo:
+Um truque para se poupar de escrever muitos prints se precisar é escrever a linha de código toda entre parênteses. Como por exemplo:
 
 ```{R}
-(B = c(2, -3, 5, 8))
+(B <- c(2, -3, 5, 8))
 
-C = c("um", "dois", "madeira", "peixe", "PET-UFF", "Niterói")
+C <- c("um", "dois", "madeira", "peixe", "PET-UFF", "Niterói")
 
-D = c(TRUE, FALSE, TRUE, FALSE, FALSE)
+D <- c(TRUE, FALSE, TRUE, FALSE, FALSE)
 
 ```
 
-Vale parar brevemente para falar de fatores. Até agora trabalhamos com dados lógicos ou numéricos, mas é muito comum encontrar dados categóricos como por exemplo sexo ou profissão. É mais simples lidar com esse tipo de dado quando é declarado como um fator. Isso é simples, basta usar a função ``factor()``. Esse tipo de classe é muito útil para rodar modelos com variáveis categóricas porque o R faz por nós o trabalho de criar variáveis dummy com cada classe e nos informa quais tipos foram observados. Para lidar com fatores também é comum usar ``levels()``, que retorna os tipos encontrados no vetor. Digamos por exemplo que ``C2`` seja uma lista de extensções de que participam 10 alunos aleatoriamente escolhidos. 
+Vale parar brevemente para falar de fatores. Até agora trabalhamos com dados lógicos ou numéricos, mas é muito comum encontrar dados categóricos como por exemplo sexo ou profissão. É mais simples lidar com esse tipo de dado quando é declarado como um fator. Isso é simples, basta usar a função ``factor()``. Esse tipo é muito útil para rodar modelos com variáveis categóricas porque o R faz por nós o trabalho de criar variáveis dummy com cada classe e nos informa quais tipos foram observados. Para lidar com fatores também é comum usar ``levels()``, que retorna os tipos encontrados no vetor. Digamos por exemplo que ``C2`` seja uma lista de extensções de que participam 10 alunos aleatoriamente escolhidos. 
 
 ```{R}
-C2 = c("PET", "Atlética", "PET", "Goal", "Opção", "PET", "Opção", "Atlética", "Opção", "PET")
-C2 = factor(C2)
+C2 <- c("PET", "Atlética", "PET", "Goal", "Opção", "PET", "Opção", "Atlética", "Opção", "PET")
+C2 <- factor(C2)
 
 C2
 levels(C2)
@@ -203,7 +203,7 @@ Operações com vetores são bem intuitivas no R porque a maioria das funções 
 
 
 ```{R}
-E = c(1, 3, 4, 9)
+E <- c(1, 3, 4, 9)
 
 F_ = B*E # multiplicação de vetores
 
@@ -211,7 +211,7 @@ F_ = B*E # multiplicação de vetores
 
 B*E # podemos também somente recuperar a conta se não quisermos printar F_
 
-G = ifelse(C == "PET-UFF", # testa se cada entrada é igual a "PET-UFF"
+G <- ifelse(C == "PET-UFF", # testa se cada entrada é igual a "PET-UFF"
            "Entrada do PET", # resposta se for
            "Não é a Entrada do PET") # resposta se não for
 print(G)
@@ -222,18 +222,18 @@ O próximo objeto são matrizes. Matrizes precisam de vetores do mesmo tipo para
 
 ```{R}
 
-H = c(1, 3, 2, 4) 
+H <- c(1, 3, 2, 4) 
 
-I = matrix(H,        # vetor
+I <- matrix(H,        # vetor
            nrow = 2, # número de linhas
            ncol = 2) # número de colunas
 
-auto = eigen(I) #autovalores e autovetores da matriz
+auto <- eigen(I) #autovalores e autovetores da matriz
 print(auto)
 
-J = c(2, 1, 5, 3)
+J <- c(2, 1, 5, 3)
 
-K = matrix(J,
+K <- matrix(J,
            ncol = 2)
 
 I %*% K ## multiplicação de matrizes
@@ -256,17 +256,17 @@ I %*% K ## multiplicação de matrizes
 
 # Data Frames
 
-A estrutura de dados mais comum é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()``  para averiguar isso.
+A estrutura de dados mais comum no dia a dia da análise de dados é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()``  para averiguar isso.
 
 ```{R, error = TRUE}
 
-elemento1 = seq(1, 100)
-elemento2 = seq(50, 150)
+elemento1 <- seq(1, 100)
+elemento2 <- seq(50, 150)
 
 length(elemento1)
 length(elemento2)
 
-base = data.frame(primeiro = elemento1,
+base <- data.frame(primeiro = elemento1,
                   segundo = elemento2)
 
 ```
@@ -275,13 +275,13 @@ No entanto se fizermos ``elemento1`` e ``elemento2`` terem o mesmo comprimento, 
 
 ```{R, error = TRUE}
 
-elemento1 = seq(1, 100)
-elemento2 = seq(50, 149)
+elemento1 <- seq(1, 100)
+elemento2 <- seq(50, 149)
 
 length(elemento1)
 length(elemento2)
 
-base = data.frame(primeiro = elemento1,
+base <- data.frame(primeiro = elemento1,
                   segundo = elemento2)
 
 head(base)
@@ -291,7 +291,7 @@ head(base)
 Nos referimos aos elementos de um DF pelo símbolo ``$``. Então se quisermos resgatar somente o vetor ``primeiro``, usamos ``base$primeiro``. Isso também vale se quisermos criar mais vetores na base. Também podemos nos referir a elementos específicos usando chaves.
 
 ```{R}
-base$terceiro = base$primeiro + base$segundo 
+base$terceiro <- base$primeiro + base$segundo 
 
 mean(base$terceiro) # média
 median(base$primeiro) # mediana
@@ -310,7 +310,7 @@ E também temos listas. São formas bem gerais de estruturas de dados, porque ad
 
 ```{R}
 
-lista = list(primeiro = base,
+lista <- list(primeiro = base,
              segundo = seq(1, 10),
              terceiro = "a")
 
@@ -374,8 +374,8 @@ Digamos que temos um vetor com dados de vendas mensais e uma meta, poderíamos e
 
 ```{R}
 
-meta = 200
-vendas_mensais = c(12, 15, 18, 25, 30, 16, 20, 12, 13, 15, 16, 22)
+meta <- 200
+vendas_mensais <- c(12, 15, 18, 25, 30, 16, 20, 12, 13, 15, 16, 22)
 
 if(sum(vendas_mensais) > meta) {
   
@@ -391,7 +391,7 @@ Podemos rebuscar um pouco isso usando funções como ``paste()`` que agrupa peda
 
 if(sum(vendas_mensais) > meta) {
   
-  diferenca = sum(vendas_mensais) - meta
+  diferenca <- sum(vendas_mensais) - meta
   
   print(paste("Meta de vendas cumprida com margem de", diferenca))
 
@@ -496,7 +496,7 @@ head(iris)
 
 ```
 
-Digamos que não saibamos quantas variáveis a base tem e queremos fazer um loop que diga a classe de todos os vetores. Lembre-se que para acessar elementos específicos de DataFrames e Listas não podemos usar só uma chave``[]``, precisamos usar duas ``[[]]``
+Digamos que não saibamos quantas variáveis a base tem e queremos fazer um loop que diga a classe de todos os vetores. Lembre-se que para acessar elementos específicos de DataFrames e Listas _como eles o são e não como subconjuntos do DF ou da list_ não podemos usar só uma chave``[]``, precisamos usar duas ``[[]]``
 
 ```{R}
 for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
@@ -508,10 +508,10 @@ for(i in 1:ncol(iris)) { #ncol() pega o número de colunas de um dataframe
 
 # Exercícios
 
-* Gere um DataFrame que é uma "grade" 100x100. Você terá então um DataFrame com 100 x 100 linhas e duas colunas, cada uma representando uma coordenada de um espaço de duas dimensões. Mais explicitamente, a primeira coluna terá cem vezes o número 1, cem vezes o número 2 e assim em diante, com a segunda tendo cem vezes a sequência de 1 a 100.
+* Gere um DataFrame que é uma "grade" 100x100. Você terá então um DataFrame com $100^2$ linhas e duas colunas, cada uma representando uma coordenada de um espaço de duas dimensões. Mais explicitamente, a primeira coluna terá cem vezes o número 1, cem vezes o número 2 e assim em diante, com a segunda tendo cem vezes a sequência de 1 a 100.
 * Faça um loop para obter a média de todas as variáveis da base de dados ``longley``
 * A base ``LifeCycleSavings`` contém dados de estrutura etária e renda. Localize a documentação da base para descobrir o que é cada variável e defina um DataFrame que contém todos os países com taxa de crescimento da renda disponível maior do que 3%.
-* A base ``mtcars`` contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis categórias, o número de cilindros, de marchas e de carburadores em fatores.
+* A base ``mtcars`` contém dados de modelos diferentes de carros e todas as suas variáveis são numéricas. Transforme todas as variáveis discretas, o número de cilindros, de marchas e de carburadores em fatores.
 
 
 # (Extra) Criação de funções
@@ -520,7 +520,7 @@ Grande parte da rotina de analisar dados é um tanto quanto repetitiva. Observe 
 
 ```{R}
 
-mensagem = function(){
+mensagem = function() {
   print("Insira aqui uma frase motivacional")
 }
 
@@ -528,33 +528,36 @@ mensagem = function(){
 mensagem()
 ```
 
-Podemos fazer funções que dependam de argumentos a serem totalmente especificados. Como normalmente isso envolve algum tipo de manipulação e solução de algoritimo, queremos devolver ao usuário a solução disso. Usamos a função ``return()`` para isso.
+Podemos fazer funções que dependam de argumentos a serem totalmente especificados. Como normalmente isso envolve algum tipo de manipulação e solução de algoritimo, queremos devolver ao usuário a solução disso. Usamos a função ``return()`` para quando queremos cortar a execução e deixamos o R cuidar de devolver ao usuário a última linha da função quando não.
 
 ```{R, error = TRUE}
 
-soma.minha = function(x, y){
-  valor = x + y
-  return(valor)
+soma.minha <- function(x, y){
+  x + y
 }
 
-soma.minha(2,4)
-soma.minha(2,"h")
+soma.minha(2, 4)
+soma.minha(2, "h")
 ```
 
 Funções, assim como código normal, aceitam controle de fluxo e isso é muito útil para lidar com possíveis erros cometidos pelo usuário. Existem alguns pormenores aqui como por exemplo as funções ``stop()``, ``message()``, ``warning()`` e ``print()`` ou sutilezas como a diferença entre ``library()`` e ``require()`` ou mesmo ``require.Namespace()``. Caso vá escrever funções que serão usadas por mais gente, é importante se informar sobre essas detalhes mais finos. Uma boa fonte é o livro Advanced R de Hadley Wickham.
 
 ```{R}
 
-soma.minha = function(x,y){
-  if(!is.numeric(x) | !is.numeric(y)){
+soma.minha = function(x,y) {
+  
+  if(!is.numeric(x) | !is.numeric(y)) {
+
     print("Você deve inserir dois números para que a função possa ser executada")
-  }else{
-    valor = x + y
-    return(valor)    
-  }
+
+    } else {
+      
+    x + y
+  
+    }
 }
 
-soma.minha(2,"h")
+soma.minha(2, "h")
 
 ```
 
@@ -564,15 +567,12 @@ Alguns argumentos não precisam ser especificados *sempre*. Lidando com dados, e
 
 ###argumentos com padrão
 
-potencia = function(x, base = 10){
-  valor = base^x
-  return(valor)
+potencia <- function(x, base = 10){
+  base^x
 }
 
 potencia(3)
-
-
-
+potencia(3, 4)
 ```
 
 
