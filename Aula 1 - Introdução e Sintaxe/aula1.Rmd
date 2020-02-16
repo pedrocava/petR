@@ -256,7 +256,9 @@ I %*% K ## multiplicação de matrizes
 
 # Data Frames
 
-A estrutura de dados mais comum no dia a dia da análise de dados é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores que admite tipos _diferentes_, então são mais flexíveis que matrizes. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()``  para averiguar isso.
+A estrutura de dados mais comum no dia a dia da análise de dados é um Data Frame. Usamos a função ``data.frame()`` para gera-los. Um DF é uma coleção de vetores - apenas vetores. Na hora de declarar o DF, podemos dar nome a cada vetor. Observe que precisamos que todos os vetores do DF tenham o *mesmo* comprimento. Podemos usar a função ``length()``  para averiguar isso. 
+
+Uma abordagem mais moderna para essa estrutura de dados é o ``tibble``. Tibbles têm algumas vantagens: ocupam menos espaço na memória e usam um sistema inteligente de redundância para evitar copiar dados, aceitam colunas com listas, não printam todos os dados no console se chamados, têm uma visualização de console mais limpa e preservam algumas propriedades interessantes que iremos estudar melhor mais à frente, quando conhecermos o ``dplyr``.
 
 ```{R, error = TRUE}
 
@@ -269,11 +271,14 @@ length(elemento2)
 base <- data.frame(primeiro = elemento1,
                   segundo = elemento2)
 
+
 ```
 
 No entanto se fizermos ``elemento1`` e ``elemento2`` terem o mesmo comprimento, o DF sai sem problemas. A função ``head()`` puxa o cabeçalho de um objeto e é muito útil para averiguar visualmente se está tudo como esperado.
 
 ```{R, error = TRUE}
+
+
 
 elemento1 <- seq(1, 100)
 elemento2 <- seq(50, 149)
@@ -285,6 +290,13 @@ base <- data.frame(primeiro = elemento1,
                   segundo = elemento2)
 
 head(base)
+
+## ou alternativamente
+
+library(tibble)
+
+(base <- tibble(primeiro = seq(1,100),
+               segundo = seq(50, 149)))
 
 ```
 

@@ -1,34 +1,47 @@
-\documentclass[]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Segundo Dia - Importando e Simulando Dados},
+  pdfauthor={Pedro Cavalcante},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Segundo Dia - Importando e Simulando Dados},
-            pdfauthor={Pedro Cavalcante},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -38,37 +51,37 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -78,52 +91,18 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Segundo Dia - Importando e Simulando Dados}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Pedro Cavalcante}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{20 de fevereiro de 2019}
-
+\title{Segundo Dia - Importando e Simulando Dados}
+\author{Pedro Cavalcante}
+\date{20 de fevereiro de 2019}
 
 \begin{document}
 \maketitle
@@ -136,9 +115,11 @@ Sistema Gerador de Séries do Banco Central do Brasil, Datasus e o Sidra
 do IBGE. Depois vamos aprender a gerar dados que seguem distribuições
 probabilísticas e estimar distribuições com dados reais.
 
-\section{Importando dados}\label{importando-dados}
+\hypertarget{importando-dados}{%
+\section{Importando dados}\label{importando-dados}}
 
-\paragraph{Uma nota cautelar}\label{uma-nota-cautelar}
+\hypertarget{uma-nota-cautelar}{%
+\paragraph{Uma nota cautelar}\label{uma-nota-cautelar}}
 
 Quando este material foi planejado originalmente, ainda não existia o
 pacote \texttt{rio}. A seguir se segue uma explicação razoavelmente
@@ -151,7 +132,7 @@ e pronto.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(rio)}
-\NormalTok{baseteste =}\StringTok{ }\KeywordTok{import}\NormalTok{(}\StringTok{"exercicio3.dta"}\NormalTok{)}
+\NormalTok{baseteste <-}\StringTok{ }\KeywordTok{import}\NormalTok{(}\StringTok{"exercicio3.dta"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -171,7 +152,8 @@ A maior parte dos formatos de dados é coberto pelo pacote
 \texttt{readr}, então tenha-o instalado em sua máquina e carregado antes
 de prosseguir.
 
-\subsection{Dados Delimitados e NAs}\label{dados-delimitados-e-nas}
+\hypertarget{dados-delimitados-e-nas}{%
+\subsection{Dados Delimitados e NAs}\label{dados-delimitados-e-nas}}
 
 Dados delimitados são relativamente comuns. Arquivos assim contém
 entradas separadas por caracteres específicos. É comum que esses
@@ -186,13 +168,36 @@ aprender como fazer o R ler essas entradas como faltantes.
 A função \texttt{readr::read\_delim} lê esse tipo de dado, basta
 dizermos no argumento \texttt{delim\ =} qual caractere é o delimitador.
 Lembre-se sempre de explorar o arquivo após a leitura para verificar se
-está tudo em ordem. Para isso é comum usar a função \texttt{head()}.
+está tudo em ordem. Para isso é comum usar a função \texttt{glimpse()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
-\NormalTok{alturas =}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"alturas.txt"}\NormalTok{, }
-                     \DataTypeTok{delim =} \StringTok{" "}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(alturas <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"alturas.txt"}\NormalTok{, }
+                     \DataTypeTok{delim =} \StringTok{" "}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -205,32 +210,47 @@ está tudo em ordem. Para isso é comum usar a função \texttt{head()}.
 ## )
 \end{verbatim}
 
+\begin{verbatim}
+## # A tibble: 22 x 3
+##     sexo idade altura
+##    <dbl> <dbl>  <dbl>
+##  1     1    19    999
+##  2     0    20    172
+##  3     1    21    182
+##  4     1    22    180
+##  5     1    22    181
+##  6     1   999    175
+##  7     1    25    172
+##  8     1    21    190
+##  9     0    23    177
+## 10     0    19    162
+## # ... with 12 more rows
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(alturas)}
+\KeywordTok{glimpse}\NormalTok{(alturas)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 3
-##    sexo idade altura
-##   <dbl> <dbl>  <dbl>
-## 1     1    19    999
-## 2     0    20    172
-## 3     1    21    182
-## 4     1    22    180
-## 5     1    22    181
-## 6     1   999    175
+## Observations: 22
+## Variables: 3
+## $ sexo   <dbl> 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, ...
+## $ idade  <dbl> 19, 20, 21, 22, 22, 999, 25, 21, 23, 19, 20, 24, 22, 22, 20,...
+## $ altura <dbl> 999, 172, 182, 180, 181, 175, 172, 190, 177, 162, 183, 169, ...
 \end{verbatim}
 
 Observe que o R leu duas pessoas com altura 999cm e idade 999 anos. Isso
 certamente é um código para dado faltante, então precisamos reler o
-arquivo, agora levando isso em conta.
+arquivo, agora levando isso em conta. Esse tipo de parâmetro é
+especialmente útil para lidar com microdados públicos, que quase sempre
+usarão algum código para indicar a ausência do dado.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
-\NormalTok{alturas =}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"alturas.txt"}\NormalTok{, }
+\NormalTok{alturas <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{"alturas.txt"}\NormalTok{, }
                      \DataTypeTok{delim =} \StringTok{" "}\NormalTok{,}
                      \DataTypeTok{na =} \StringTok{"999"}\NormalTok{)}
 \end{Highlighting}
@@ -247,27 +267,24 @@ arquivo, agora levando isso em conta.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(alturas)}
+\KeywordTok{glimpse}\NormalTok{(alturas)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 3
-##    sexo idade altura
-##   <dbl> <dbl>  <dbl>
-## 1     1    19     NA
-## 2     0    20    172
-## 3     1    21    182
-## 4     1    22    180
-## 5     1    22    181
-## 6     1    NA    175
+## Observations: 22
+## Variables: 3
+## $ sexo   <dbl> 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, ...
+## $ idade  <dbl> 19, 20, 21, 22, 22, NA, 25, 21, 23, 19, 20, 24, 22, 22, 20, ...
+## $ altura <dbl> NA, 172, 182, 180, 181, 175, 172, 190, 177, 162, 183, 169, 1...
 \end{verbatim}
 
 Agora sim temos uma leitura limpa dos dados.
 
+\hypertarget{dados-de-stata-.dta-separados-por-vuxedrgula-.csv-e-de-excel-.xlsx}{%
 \subsection{Dados de Stata (.dta), Separados por Vírgula (.csv) e de
 Excel
-(.xlsx)}\label{dados-de-stata-.dta-separados-por-virgula-.csv-e-de-excel-.xlsx}
+(.xlsx)}\label{dados-de-stata-.dta-separados-por-vuxedrgula-.csv-e-de-excel-.xlsx}}
 
 O processo é muito similar ao de dados delimitados. O arquivo
 \texttt{ministerios.xlsx} contém dados de gastos ministeriais
@@ -286,53 +303,64 @@ função \texttt{haven::read\_dta}. Por padrão, a versão a ser lida é a
 \KeywordTok{library}\NormalTok{(readxl) }\CommentTok{# para dados de Excel}
 \KeywordTok{library}\NormalTok{(haven) }\CommentTok{# para dados de Stata}
 
-\NormalTok{ministerios =}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"ministerios.xlsx"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(ministerios)}
+\NormalTok{ministerios <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"ministerios.xlsx"}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(ministerios)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 6
-##   `Ano/Mês` Órgão           GND                     Pago `RP Pago`     Soma
-##   <chr>     <chr>           <chr>                  <dbl>     <dbl>    <dbl>
-## 1 2001/01   CÂMARA DOS DEP~ INVESTIMENTOS        2.02e 3   919592.  9.22e 5
-## 2 2001/01   CÂMARA DOS DEP~ OUTRAS DESPESAS C~   5.60e 6  9518239.  1.51e 7
-## 3 2001/01   CÂMARA DOS DEP~ PESSOAL E ENCARGO~   7.27e 7  3819687.  7.65e 7
-## 4 2001/01   ENCARGOS FINAN~ AMORTIZACAO/REFIN~   1.97e10 72772660.  1.98e10
-## 5 2001/01   ENCARGOS FINAN~ INVERSOES FINANCE~   0.          1870.  1.87e 3
-## 6 2001/01   ENCARGOS FINAN~ JUROS E ENCARGOS ~   5.97e 9   962842.  5.97e 9
+## Observations: 28,598
+## Variables: 6
+## $ `Ano/Mês` <chr> "2001/01", "2001/01", "2001/01", "2001/01", "2001/01", "2...
+## $ Órgão     <chr> "CÂMARA DOS DEPUTADOS", "CÂMARA DOS DEPUTADOS", "CÂMARA D...
+## $ GND       <chr> "INVESTIMENTOS", "OUTRAS DESPESAS CORRENTES", "PESSOAL E ...
+## $ Pago      <dbl> 2.024110e+03, 5.596846e+06, 7.265991e+07, 1.973562e+10, 0...
+## $ `RP Pago` <dbl> 919592.50, 9518239.28, 3819686.93, 72772660.10, 1870.30, ...
+## $ Soma      <dbl> 9.216166e+05, 1.511509e+07, 7.647960e+07, 1.980839e+10, 1...
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prouni =}\StringTok{ }\KeywordTok{read_dta}\NormalTok{(}\StringTok{"prouni.dta"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(prouni)}
+\NormalTok{prouni <-}\StringTok{ }\KeywordTok{read_dta}\NormalTok{(}\StringTok{"prouni.dta"}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(prouni)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 27
-##   Bacharelado Licensiatura Tecnologico Integral Noturno Matutino Distancia
-##         <dbl>        <dbl>       <dbl>    <dbl>   <dbl>    <dbl>     <dbl>
-## 1           1            0           0        1       0        0         0
-## 2           1            0           0        0       1        0         0
-## 3           1            0           0        1       0        0         0
-## 4           1            0           0        0       1        0         0
-## 5           1            0           0        1       0        0         0
-## 6           1            0           0        1       0        0         0
-## # ... with 20 more variables: Vespertino <dbl>, mensalidade <dbl>,
-## #   bolsa_integral_cotas <dbl>, bolsa_integral_ampla <dbl>,
-## #   bolsa_parcial_cotas <dbl>, bolsa_parcial_ampla <dbl>,
-## #   total_bolsas <dbl>, curso_id <dbl>, Medicina <dbl>,
-## #   cidade_busca <chr>, uf_busca <chr>, cidade_filtro <chr>,
-## #   universidade_nome <chr>, campus_nome <chr>, campus_id <dbl>,
-## #   nome <chr>, nota_integral_ampla <dbl>, nota_integral_cotas <dbl>,
-## #   nota_parcial_ampla <dbl>, nota_parcial_cotas <dbl>
+## Observations: 41,447
+## Variables: 27
+## $ Bacharelado          <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1...
+## $ Licensiatura         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Tecnologico          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Integral             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ Noturno              <dbl> 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0...
+## $ Matutino             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1...
+## $ Distancia            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Vespertino           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ mensalidade          <dbl> 9999.99, 9836.40, 9715.61, 9689.34, 9674.34, 9...
+## $ bolsa_integral_cotas <dbl> 15, 1, 2, 3, 4, 8, 3, 4, 7, 13, 4, 5, 2, 2, 1,...
+## $ bolsa_integral_ampla <dbl> 14, NA, 5, 2, 1, 15, 5, 3, 5, 4, 4, 1, 9, 1, 2...
+## $ bolsa_parcial_cotas  <dbl> NA, NA, 6, NA, 5, NA, NA, NA, NA, NA, 5, NA, N...
+## $ bolsa_parcial_ampla  <dbl> NA, NA, 10, NA, 2, NA, NA, NA, NA, NA, 5, NA, ...
+## $ total_bolsas         <dbl> 29, 1, 23, 5, 12, 23, 8, 7, 12, 17, 18, 6, 11,...
+## $ curso_id             <dbl> 7.067104e+11, 1.041912e+14, 1.002329e+12, 1.04...
+## $ Medicina             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ cidade_busca         <chr> "Campo Grande", "Crateus", "Sao Paulo", "Crate...
+## $ uf_busca             <chr> "MS", "CE", "SP", "CE", "AC", "SP", "SP", "MG"...
+## $ cidade_filtro        <chr> "NTAwMjAwNDAyNzA0", "MjMwNDAxODA0MTAz", "MzUxN...
+## $ universidade_nome    <chr> "Universidade Anhanguera - UNIDERP", "Faculdad...
+## $ campus_nome          <chr> "CAMPO GRANDE - SEDE - Miguel Couto", "UNIDADE...
+## $ campus_id            <dbl> 706710, 1041912, 1002328, 1041912, 658996, 657...
+## $ nome                 <chr> "Medicina", "Enfermagem", "Medicina", "Psicolo...
+## $ nota_integral_ampla  <dbl> 740.22, 663.36, 739.62, 651.00, 758.32, 738.92...
+## $ nota_integral_cotas  <dbl> 726.46, NA, 738.08, 652.22, 723.94, 728.86, 73...
+## $ nota_parcial_ampla   <dbl> NA, NA, 738.96, NA, 734.92, NA, NA, NA, NA, NA...
+## $ nota_parcial_cotas   <dbl> NA, NA, 718.64, NA, 711.26, NA, NA, NA, NA, NA...
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prouni =}\StringTok{ }\KeywordTok{read_csv2}\NormalTok{(}\StringTok{"prouni.csv"}\NormalTok{)}
+\NormalTok{prouni <-}\StringTok{ }\KeywordTok{read_csv2}\NormalTok{(}\StringTok{"prouni.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -359,31 +387,45 @@ função \texttt{haven::read\_dta}. Por padrão, a versão a ser lida é a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(prouni)}
+\KeywordTok{glimpse}\NormalTok{(prouni)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 27
-##   Bacharelado Licensiatura Tecnologico Integral Noturno Matutino Distancia
-##         <dbl>        <dbl>       <dbl>    <dbl>   <dbl>    <dbl>     <dbl>
-## 1           1            0           0        1       0        0         0
-## 2           1            0           0        0       1        0         0
-## 3           1            0           0        1       0        0         0
-## 4           1            0           0        0       1        0         0
-## 5           1            0           0        1       0        0         0
-## 6           1            0           0        1       0        0         0
-## # ... with 20 more variables: Vespertino <dbl>, mensalidade <dbl>,
-## #   bolsa_integral_cotas <dbl>, bolsa_integral_ampla <dbl>,
-## #   bolsa_parcial_cotas <dbl>, bolsa_parcial_ampla <dbl>,
-## #   total_bolsas <dbl>, curso_id <dbl>, Medicina <dbl>,
-## #   cidade_busca <chr>, uf_busca <chr>, cidade_filtro <chr>,
-## #   universidade_nome <chr>, campus_nome <chr>, campus_id <dbl>,
-## #   nome <chr>, nota_integral_ampla <dbl>, nota_integral_cotas <dbl>,
-## #   nota_parcial_ampla <dbl>, nota_parcial_cotas <dbl>
+## Observations: 41,447
+## Variables: 27
+## $ Bacharelado          <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1...
+## $ Licensiatura         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Tecnologico          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Integral             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ Noturno              <dbl> 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0...
+## $ Matutino             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1...
+## $ Distancia            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Vespertino           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ mensalidade          <dbl> 9999.99, 9836.40, 9715.61, 9689.34, 9674.34, 9...
+## $ bolsa_integral_cotas <dbl> 15, 1, 2, 3, 4, 8, 3, 4, 7, 13, 4, 5, 2, 2, 1,...
+## $ bolsa_integral_ampla <dbl> 14, NA, 5, 2, 1, 15, 5, 3, 5, 4, 4, 1, 9, 1, 2...
+## $ bolsa_parcial_cotas  <dbl> NA, NA, 6, NA, 5, NA, NA, NA, NA, NA, 5, NA, N...
+## $ bolsa_parcial_ampla  <dbl> NA, NA, 10, NA, 2, NA, NA, NA, NA, NA, 5, NA, ...
+## $ total_bolsas         <dbl> 29, 1, 23, 5, 12, 23, 8, 7, 12, 17, 18, 6, 11,...
+## $ curso_id             <dbl> 7.067104e+11, 1.041912e+14, 1.002329e+12, 1.04...
+## $ Medicina             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ cidade_busca         <chr> "Campo Grande", "Crateus", "Sao Paulo", "Crate...
+## $ uf_busca             <chr> "MS", "CE", "SP", "CE", "AC", "SP", "SP", "MG"...
+## $ cidade_filtro        <chr> "NTAwMjAwNDAyNzA0", "MjMwNDAxODA0MTAz", "MzUxN...
+## $ universidade_nome    <chr> "Universidade Anhanguera - UNIDERP", "Faculdad...
+## $ campus_nome          <chr> "CAMPO GRANDE - SEDE - Miguel Couto", "UNIDADE...
+## $ campus_id            <dbl> 706710, 1041912, 1002328, 1041912, 658996, 657...
+## $ nome                 <chr> "Medicina", "Enfermagem", "Medicina", "Psicolo...
+## $ nota_integral_ampla  <dbl> 740.22, 663.36, 739.62, 651.00, 758.32, 738.92...
+## $ nota_integral_cotas  <dbl> 726.46, NA, 738.08, 652.22, 723.94, 728.86, 73...
+## $ nota_parcial_ampla   <dbl> NA, NA, 738.96, NA, 734.92, NA, NA, NA, NA, NA...
+## $ nota_parcial_cotas   <dbl> NA, NA, 718.64, NA, 711.26, NA, NA, NA, NA, NA...
 \end{verbatim}
 
-\subsection{Formatos específicos do R}\label{formatos-especificos-do-r}
+\hypertarget{formatos-especuxedficos-do-r}{%
+\subsection{Formatos específicos do
+R}\label{formatos-especuxedficos-do-r}}
 
 A linguagem R tem duas extensões de dados, \texttt{.Rdata} e
 \texttt{.Rds}. Ambas são muito úteis porque geram arquivos bem mais
@@ -395,34 +437,48 @@ dessa extensão e \texttt{writeRDS()} para salvar arquivos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prouni =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\StringTok{"prouni.Rds"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(prouni)}
+\NormalTok{prouni <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\StringTok{"prouni.Rds"}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(prouni)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 27
-##   Bacharelado Licensiatura Tecnologico Integral Noturno Matutino Distancia
-##         <dbl>        <dbl>       <dbl>    <dbl>   <dbl>    <dbl>     <dbl>
-## 1           1            0           0        1       0        0         0
-## 2           1            0           0        0       1        0         0
-## 3           1            0           0        1       0        0         0
-## 4           1            0           0        0       1        0         0
-## 5           1            0           0        1       0        0         0
-## 6           1            0           0        1       0        0         0
-## # ... with 20 more variables: Vespertino <dbl>, mensalidade <dbl>,
-## #   bolsa_integral_cotas <dbl>, bolsa_integral_ampla <dbl>,
-## #   bolsa_parcial_cotas <dbl>, bolsa_parcial_ampla <dbl>,
-## #   total_bolsas <dbl>, curso_id <dbl>, Medicina <dbl>,
-## #   cidade_busca <chr>, uf_busca <chr>, cidade_filtro <chr>,
-## #   universidade_nome <chr>, campus_nome <chr>, campus_id <dbl>,
-## #   nome <chr>, nota_integral_ampla <dbl>, nota_integral_cotas <dbl>,
-## #   nota_parcial_ampla <dbl>, nota_parcial_cotas <dbl>
+## Observations: 41,447
+## Variables: 27
+## $ Bacharelado          <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1...
+## $ Licensiatura         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Tecnologico          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Integral             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ Noturno              <dbl> 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0...
+## $ Matutino             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1...
+## $ Distancia            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ Vespertino           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0...
+## $ mensalidade          <dbl> 9999.99, 9836.40, 9715.61, 9689.34, 9674.34, 9...
+## $ bolsa_integral_cotas <dbl> 15, 1, 2, 3, 4, 8, 3, 4, 7, 13, 4, 5, 2, 2, 1,...
+## $ bolsa_integral_ampla <dbl> 14, NA, 5, 2, 1, 15, 5, 3, 5, 4, 4, 1, 9, 1, 2...
+## $ bolsa_parcial_cotas  <dbl> NA, NA, 6, NA, 5, NA, NA, NA, NA, NA, 5, NA, N...
+## $ bolsa_parcial_ampla  <dbl> NA, NA, 10, NA, 2, NA, NA, NA, NA, NA, 5, NA, ...
+## $ total_bolsas         <dbl> 29, 1, 23, 5, 12, 23, 8, 7, 12, 17, 18, 6, 11,...
+## $ curso_id             <dbl> 7.067104e+11, 1.041912e+14, 1.002329e+12, 1.04...
+## $ Medicina             <dbl> 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0...
+## $ cidade_busca         <chr> "Campo Grande", "Crateus", "Sao Paulo", "Crate...
+## $ uf_busca             <chr> "MS", "CE", "SP", "CE", "AC", "SP", "SP", "MG"...
+## $ cidade_filtro        <chr> "NTAwMjAwNDAyNzA0", "MjMwNDAxODA0MTAz", "MzUxN...
+## $ universidade_nome    <chr> "Universidade Anhanguera - UNIDERP", "Faculdad...
+## $ campus_nome          <chr> "CAMPO GRANDE - SEDE - Miguel Couto", "UNIDADE...
+## $ campus_id            <dbl> 706710, 1041912, 1002328, 1041912, 658996, 657...
+## $ nome                 <chr> "Medicina", "Enfermagem", "Medicina", "Psicolo...
+## $ nota_integral_ampla  <dbl> 740.22, 663.36, 739.62, 651.00, 758.32, 738.92...
+## $ nota_integral_cotas  <dbl> 726.46, NA, 738.08, 652.22, 723.94, 728.86, 73...
+## $ nota_parcial_ampla   <dbl> NA, NA, 738.96, NA, 734.92, NA, NA, NA, NA, NA...
+## $ nota_parcial_cotas   <dbl> NA, NA, 718.64, NA, 711.26, NA, NA, NA, NA, NA...
 \end{verbatim}
 
-\subsection{Dados da Internet}\label{dados-da-internet}
+\hypertarget{dados-da-internet}{%
+\subsection{Dados da Internet}\label{dados-da-internet}}
 
-\subsubsection{De links Diretos}\label{de-links-diretos}
+\hypertarget{de-links-diretos}{%
+\subsubsection{De links Diretos}\label{de-links-diretos}}
 
 Uma ferramenta muito boa em R são arquivos temporários. Eles podem ser
 usados para diversos fins e baixar arquivos diretamente de links dados é
@@ -456,52 +512,25 @@ um arquivo em extensão \texttt{.rds}, devemos usar \texttt{readRDS()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{link =}\StringTok{ "https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true"}
+\NormalTok{link <-}\StringTok{ "https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true"}
 
-\NormalTok{temporario =}\StringTok{ }\KeywordTok{tempfile}\NormalTok{()}
+\NormalTok{temporario <-}\StringTok{ }\KeywordTok{tempfile}\NormalTok{()}
 \KeywordTok{download.file}\NormalTok{(link, }\DataTypeTok{destfile =}\NormalTok{ temporario, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{)}
 
-\NormalTok{RAIS_acre =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(temporario)}
-\KeywordTok{head}\NormalTok{(RAIS_acre)}
+\NormalTok{RAIS_acre <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(temporario)}
+\KeywordTok{glimpse}\NormalTok{(RAIS_acre)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 6 x 54
-##   `Motivo Desliga~ `CBO Ocupação 2~ `CNAE 2.0 Class~ `CNAE 95 Classe`
-##              <int>            <int> <chr>            <chr>           
-## 1               11           992225 42138            45225           
-## 2               11           517420 43215            45411           
-## 3               11           717020 43215            45411           
-## 4               11           621005 01512            01414           
-## 5               11           715505 41204            45217           
-## 6               11           715210 41204            45217           
-## # ... with 50 more variables: `Vínculo Ativo 31/12` <int>, `Faixa Remun
-## #   Dezem (SM)` <chr>, `Faixa Remun Média (SM)` <chr>, `Faixa Tempo
-## #   Emprego` <chr>, horas <int>, Idade <int>, `Ind CEI Vinculado` <int>,
-## #   `Ind Simples` <int>, `Mês Admissão` <chr>, `Mês Desligamento` <chr>,
-## #   `Mun Trab` <chr>, Município <int>, `Natureza Jurídica` <int>, `Ind
-## #   Portador Defic` <int>, `Qtd Dias Afastamento` <int>, `Vl Remun
-## #   Dezembro Nom` <chr>, `Vl Remun Dezembro (SM)` <chr>, `Vl Remun Média
-## #   (SM)` <chr>, `CNAE 2.0 Subclasse` <chr>, duracao <chr>, `Tipo
-## #   Admissão` <chr>, `Tipo Estab_1` <chr>, `Tipo Defic` <chr>, `Tipo
-## #   Vínculo` <int>, `Ano Chegada Brasil` <chr>, `Ind Trab Parcial` <int>,
-## #   `Ind Trab Intermitente` <int>, aposentadoria <dbl>, morte <dbl>,
-## #   justacausa <dbl>, outrosmotivos_termino <dbl>, demissao <dbl>,
-## #   gringo <dbl>, branco <dbl>, negro <dbl>, outra_etnia <dbl>,
-## #   etnia <chr>, homem <dbl>, sexo <chr>, CNPJ <dbl>,
-## #   ensino_superior <dbl>, firma_grande <dbl>, industria <dbl>,
-## #   servicos <dbl>, agricultura <dbl>, construcao <dbl>, setor <chr>,
-## #   salario <dbl>, tempo_emprego <dbl>, Graduacao <chr>
-\end{verbatim}
-
-\subsubsection{De Pacotes}\label{de-pacotes}
+\hypertarget{de-pacotes}{%
+\subsubsection{De Pacotes}\label{de-pacotes}}
 
 Vários pacotes de R trazem funcionalidades para importar dados de
 maneira mais simples, vamos cobrir alguns aqui.
 
+\hypertarget{brazilian-economic-time-series-bets}{%
 \paragraph{Brazilian Economic Time Series
-(BETS)}\label{brazilian-economic-time-series-bets}
+(BETS)}\label{brazilian-economic-time-series-bets}}
 
 O BETS extrai séries diretamente do SGS/BCB, basta alimentar um código
 específico da série. A função \texttt{BETSsearch()} permite fazer
@@ -517,95 +546,11 @@ aprenderemos a fazer gráficos muito mais bonitos.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(BETS)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Registered S3 method overwritten by 'xts':
-##   method     from
-##   as.zoo.xts zoo
-\end{verbatim}
-
-\begin{verbatim}
-## Registered S3 method overwritten by 'quantmod':
-##   method            from
-##   as.zoo.data.frame zoo
-\end{verbatim}
-
-\begin{verbatim}
-## Registered S3 methods overwritten by 'forecast':
-##   method             from    
-##   fitted.fracdiff    fracdiff
-##   residuals.fracdiff fracdiff
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'BETS'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:stats':
-## 
-##     predict
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{citation}\NormalTok{(}\StringTok{"BETS"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## 
-## To cite package 'BETS' in publications use:
-## 
-##   Pedro Costa Ferreira, Talitha Speranza and Jonatha Costa (2018).
-##   BETS: Brazilian Economic Time Series. R package version 0.4.9.
-##   https://CRAN.R-project.org/package=BETS
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {BETS: Brazilian Economic Time Series},
-##     author = {Pedro {Costa Ferreira} and Talitha Speranza and Jonatha Costa},
-##     year = {2018},
-##     note = {R package version 0.4.9},
-##     url = {https://CRAN.R-project.org/package=BETS},
-##   }
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{BETSsearch}\NormalTok{(}\DataTypeTok{description =} \StringTok{"ipca"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## 
-## BETS-package: Found 51 out of 18706 time series.
-\end{verbatim}
-
-\begin{verbatim}
-## # A tibble: 51 x 7
-##    code  description            unit    periodicity start last_value source
-##    <chr> <chr>                  <chr>   <chr>       <chr> <chr>      <chr> 
-##  1 10764 National Consumer Pri~ Monthl~ M           31/0~ mar/2018   IBGE  
-##  2 10841 National Consumer Pri~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  3 10842 National Consumer Pri~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  4 10843 National Consumer Pri~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  5 10844 National Consumer Pri~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  6 11426 Broad national consum~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  7 11427 Broad national consum~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  8 11428 Broad national consum~ Monthl~ M           31/0~ mar/2018   BCB-D~
-##  9 11752 Real effective exchan~ Index   M           31/0~ mar/2018   BCB-D~
-## 10 11753 Real effective exchan~ Index   M           31/0~ mar/2018   BCB-D~
-## # ... with 41 more rows
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ipca =}\StringTok{ }\KeywordTok{BETSget}\NormalTok{(}\DecValTok{433}\NormalTok{)}
+\NormalTok{ipca <-}\StringTok{ }\KeywordTok{BETSget}\NormalTok{(}\DecValTok{433}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(ipca, }
      \DataTypeTok{main =} \StringTok{"Variação Mensal do IPCA, 1980-2019"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"%"}\NormalTok{,}
@@ -614,9 +559,8 @@ aprenderemos a fazer gráficos muito mais bonitos.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{aula2_files/figure-latex/unnamed-chunk-7-1.pdf}
-
-\paragraph{ElectionsBR}\label{electionsbr}
+\hypertarget{electionsbr}{%
+\paragraph{ElectionsBR}\label{electionsbr}}
 
 O pacote \texttt{electionsBR} traz ferramentas para importar dados
 eleitorais do repositório do TSE. É uma boa ideia olhar a documentação
@@ -628,49 +572,14 @@ eleição presidencial a nível de municípios.
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(electionsBR)}
 \KeywordTok{citation}\NormalTok{(}\StringTok{"electionsBR"}\NormalTok{)}
+
+\NormalTok{presidente <-}\StringTok{ }\KeywordTok{president_mun_vote}\NormalTok{(}\DataTypeTok{year =} \DecValTok{2010}\NormalTok{)}
+\KeywordTok{glimpse}\NormalTok{(presidente)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-## To cite electionsBR in publications, please use:
-## 
-##   Meireles, Fernando; Silva, Denisson; Costa, Beatriz. (2016).
-##   electionsBR: R functions to download and clean Brazilian
-##   electoral data. URL: http://electionsbr.com/
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {{electionsBR}: {R} Functions to Download and Clean {B}razilian Electoral Data},
-##     author = {Fernando Meireles and Denisson Silva and Beatriz Costa},
-##     year = {2016},
-##     url = {http://electionsbr.com/},
-##   }
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{presidente =}\StringTok{ }\KeywordTok{president_mun_vote}\NormalTok{(}\DataTypeTok{year =} \DecValTok{2010}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(presidente)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 6 x 10
-##   ANO_ELEICAO SIGLA_UF CODIGO_MUNICIPIO NOME_MUNICIPIO SIGLA_PARTIDO
-##         <int> <chr>               <int> <chr>          <chr>        
-## 1        2010 AC                   1007 BUJARI         PSDB         
-## 2        2010 AC                   1007 BUJARI         PT           
-## 3        2010 AC                   1015 CAPIXABA       PSDB         
-## 4        2010 AC                   1015 CAPIXABA       PT           
-## 5        2010 AC                   1023 PORTO ACRE     PSDB         
-## 6        2010 AC                   1023 PORTO ACRE     PT           
-## # ... with 5 more variables: NOME_PARTIDO <chr>, NUMERO_PARTIDO <int>,
-## #   NOME_COLIGACAO <chr>, COMPOSICAO_LEGENDA <chr>, TOTAL_VOTOS <dbl>
-\end{verbatim}
-
-\paragraph{Outros pacotes}\label{outros-pacotes}
+\hypertarget{outros-pacotes}{%
+\paragraph{Outros pacotes}\label{outros-pacotes}}
 
 À essa altura espero que você já tenha entendido um pouco o espírito da
 coisa, então vou deixar uma lista pequena de outros pacotes úteis para
@@ -698,7 +607,8 @@ importar dados.
   dados financeiros.
 \end{itemize}
 
-\section{Simulando dados}\label{simulando-dados}
+\hypertarget{simulando-dados}{%
+\section{Simulando dados}\label{simulando-dados}}
 
 Para simular dados no R basta especificarmos uma distribuição
 probabilística. O pacote \texttt{stats}, parte da Biblioteca Padrão,
@@ -752,8 +662,9 @@ Algumas funções e suas abreviações:
   \texttt{unif} para a Uniforme
 \end{itemize}
 
-\subsection{\texorpdfstring{Um pequeno aviso sobre geração de dados
-``aleatórios''}{Um pequeno aviso sobre geração de dados aleatórios}}\label{um-pequeno-aviso-sobre-geracao-de-dados-aleatorios}
+\hypertarget{um-pequeno-aviso-sobre-gerauxe7uxe3o-de-dados-aleatuxf3rios}{%
+\subsection{Um pequeno aviso sobre geração de dados
+``aleatórios''}\label{um-pequeno-aviso-sobre-gerauxe7uxe3o-de-dados-aleatuxf3rios}}
 
 É difícil fielmente gerar dados \emph{aleatórios} porque sempre
 precisamos de algum processo gerador dos dados por trás. Esse assunto é
@@ -799,32 +710,7 @@ interessante, em outros não. Vou dar dois exemplos:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{Sys.time}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "2019-07-02 00:34:39 -03"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{semente =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
-\KeywordTok{print}\NormalTok{(semente)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1562038480
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{set.seed}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{()))}
-
-\NormalTok{## ou alternativamente}
-
-\KeywordTok{set.seed}\NormalTok{(semente)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -839,8 +725,6 @@ ler a documentação para saber como conseguir a que você quer.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{## EXEMPLOS COM DISTRIBUIÇÕES DE PROBABILIDADE}
-
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{) }\CommentTok{# semente definida}
 
 \KeywordTok{pnorm}\NormalTok{(}\DecValTok{28}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{25}\NormalTok{, }\DataTypeTok{sd =} \KeywordTok{sqrt}\NormalTok{(}\DecValTok{32}\NormalTok{)) }\CommentTok{# probabilidade acumulada do valor 28 numa distribuição N(25, 32)}
@@ -896,7 +780,7 @@ ler a documentação para saber como conseguir a que você quer.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{punif}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{min =} \OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{) }\CommentTok{# probabilidade acumulada no 0 de uma U(-1, 1)}
+\KeywordTok{punif}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{min =} \DecValTok{-1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{) }\CommentTok{# probabilidade acumulada no 0 de uma U(-1, 1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -914,7 +798,7 @@ amostra aderem a uma distribuição contínua qualquer.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{X =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{2000}\NormalTok{,}
+\NormalTok{X <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{2000}\NormalTok{,}
           \DataTypeTok{mean =} \DecValTok{2}\NormalTok{,}
           \DataTypeTok{sd =} \KeywordTok{sqrt}\NormalTok{(}\DecValTok{8}\NormalTok{))}
 
@@ -953,8 +837,7 @@ amostra aderem a uma distribuição contínua qualquer.
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  1.4069975 -3.2296778 -0.9301134  7.0824336 -0.8883707  2.4811205
-## [7]  4.1747019
+## [1]  1.4069975 -3.2296778 -0.9301134  7.0824336 -0.8883707  2.4811205  4.1747019
 \end{verbatim}
 
 \begin{Shaded}
@@ -989,7 +872,8 @@ amostra aderem a uma distribuição contínua qualquer.
 ## alternative hypothesis: two-sided
 \end{verbatim}
 
-\section{Exercícios}\label{exercicios}
+\hypertarget{exercuxedcios}{%
+\section{Exercícios}\label{exercuxedcios}}
 
 \begin{itemize}
 \tightlist
@@ -1010,6 +894,5 @@ amostra aderem a uma distribuição contínua qualquer.
   Encontre o número \(c\) tal que \(P(Z>c) = 0.7\) e
   \(Z \sim Gamma(1, 5)\).
 \end{itemize}
-
 
 \end{document}

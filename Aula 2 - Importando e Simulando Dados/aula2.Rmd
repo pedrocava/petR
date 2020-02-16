@@ -3,8 +3,8 @@ title: "Segundo Dia - Importando e Simulando Dados"
 author: "Pedro Cavalcante"
 date: "20 de fevereiro de 2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 Agora que cobrimos a sintaxe básica e sabemos conversar com o R, podemos realmente *fazer* coisas. Hoje o foco será em obter dados. Vamos aprender a importar dados de fontes variadas, baixar da internet e cobrir alguns pacotes que baixam dados estruturados de fontes como o Sistema Gerador de Séries do Banco Central do Brasil, Datasus e o Sidra do IBGE. Depois vamos aprender a gerar dados que seguem distribuições probabilísticas e estimar distribuições com dados reais.
@@ -17,7 +17,7 @@ Quando este material foi planejado originalmente, ainda não existia o pacote ``
 
 ```{R}
 library(rio)
-baseteste = import("exercicio3.dta")
+baseteste <- import("exercicio3.dta")
 ```
 
 Se você quer ter contato com pacotes que te permitem entender melhor o processo de importação de dados, é uma boa ideia ler a seção seguinte. Se não, recomendo pular diretamente para a seção de simulação de dados ou para a seção de importação de dados da internet.
@@ -32,28 +32,29 @@ Dados delimitados são relativamente comuns. Arquivos assim contém entradas sep
 
 É também comum que algumas observações não estejam completas, esse tipo de entrada vazia é chamado de NA pelo R. Como muitas organizações usam códigos específicos para entradas vazias - como por exemplo 999999999999 pelo IBGE na Pesquisa Nacional de Amostra Domiciliar - vamos também aprender como fazer o R ler essas entradas como faltantes.
 
-A função ``readr::read_delim`` lê esse tipo de dado, basta dizermos no argumento ``delim =`` qual caractere é o delimitador. Lembre-se sempre de explorar o arquivo após a leitura para verificar se está tudo em ordem. Para isso é comum usar a função ``head()``.
+A função ``readr::read_delim`` lê esse tipo de dado, basta dizermos no argumento ``delim =`` qual caractere é o delimitador. Lembre-se sempre de explorar o arquivo após a leitura para verificar se está tudo em ordem. Para isso é comum usar a função ``glimpse()``.
 
 ```{R}
 
 library(readr)
-alturas = read_delim("alturas.txt", 
-                     delim = " ")
+library(dplyr)
 
-head(alturas)
+(alturas <- read_delim("alturas.txt", 
+                     delim = " "))
 
+glimpse(alturas)
 ```
 
-Observe que o R leu duas pessoas com altura 999cm e idade 999 anos. Isso certamente é um código para dado faltante, então precisamos reler o arquivo, agora levando isso em conta.
+Observe que o R leu duas pessoas com altura 999cm e idade 999 anos. Isso certamente é um código para dado faltante, então precisamos reler o arquivo, agora levando isso em conta. Esse tipo de parâmetro é especialmente útil para lidar com microdados públicos, que quase sempre usarão algum código para indicar a ausência do dado.
 
 ```{R}
 
 library(readr)
-alturas = read_delim("alturas.txt", 
+alturas <- read_delim("alturas.txt", 
                      delim = " ",
                      na = "999")
 
-head(alturas)
+glimpse(alturas)
 
 ```
 
@@ -70,14 +71,14 @@ Vale lembrar que cada versão do Stata tem um padrão diferente para arquivos de
 library(readxl) # para dados de Excel
 library(haven) # para dados de Stata
 
-ministerios = read_xlsx("ministerios.xlsx")
-head(ministerios)
+ministerios <- read_xlsx("ministerios.xlsx")
+glimpse(ministerios)
 
-prouni = read_dta("prouni.dta")
-head(prouni)
+prouni <- read_dta("prouni.dta")
+glimpse(prouni)
 
-prouni = read_csv2("prouni.csv")
-head(prouni)
+prouni <- read_csv2("prouni.csv")
+glimpse(prouni)
 
 
 ```
@@ -87,8 +88,8 @@ head(prouni)
 A linguagem R tem duas extensões de dados, ``.Rdata`` e ``.Rds``. Ambas são muito úteis porque geram arquivos bem mais leves para um mesmo volume de dados que vários outros formatos populares. ``.Rdata`` serve para armazenar vários objetos de R - como por exemplo todo o seu ambiente de trabalho - e ``.Rds`` para um único objeto. Usamos as funções ``readRDS()`` para ler arquivos dessa extensão e ``writeRDS()`` para salvar arquivos. 
 
 ```{R}
-prouni = readRDS("prouni.Rds")
-head(prouni)
+prouni <- readRDS("prouni.Rds")
+glimpse(prouni)
 
 ```
 
@@ -106,14 +107,14 @@ Depois de localizado o link para o download do arquivo, o procedimento que norma
 
 O procedimento é razoavelmente simples. Primeiro definimos um arquivo temporário com a função ``tempfile()``, depois baixamos o arquivo usando a função ``download.file()`` - cuidado ao alterar o parâmetro ``mode=``, ele é um tanto quanto imprevisível - e depois lemos com a função apropriada o arquivo baixado. Como estamos baixando um arquivo em extensão ``.rds``, devemos usar ``readRDS()``.
 
-```{R}
-link = "https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true"
+```{R, eval = FALSE}
+link <- "https://github.com/danmrc/azul/blob/master/content/post/cox_rais/acre_rais_2017.Rds?raw=true"
 
-temporario = tempfile()
+temporario <- tempfile()
 download.file(link, destfile = temporario, mode = "wb")
 
-RAIS_acre = readRDS(temporario)
-head(RAIS_acre)
+RAIS_acre <- readRDS(temporario)
+glimpse(RAIS_acre)
 
 ```
 
@@ -130,14 +131,14 @@ O BETS extrai séries diretamente do SGS/BCB, basta alimentar um código especí
 Como spoiler: o código da série de variação mensal do IPCA é 433. Vamos importar uma série e gerar um gráfico. Não se preocupe se você ainda não sabe fazer gráficos no R. Vamos ver isso no próximo encontro - e aprenderemos a fazer gráficos muito mais bonitos.
 
 
-```{R}
+```{R, eval = FALSE}
 
 library(BETS)
 citation("BETS")
 
 BETSsearch(description = "ipca")
 
-ipca = BETSget(433)
+ipca <- BETSget(433)
 plot(ipca, 
      main = "Variação Mensal do IPCA, 1980-2019", 
      ylab = "%",
@@ -150,12 +151,12 @@ plot(ipca,
 
 O pacote ``electionsBR`` traz ferramentas para importar dados eleitorais do repositório do TSE. É uma boa ideia olhar a documentação do pacote porque cada tipo de eleição tem uma função própria. Como exemplo vou usar ``president_mun_vote()`` para baixar dados de eleição presidencial a nível de municípios.
 
-```{R, warning = FALSE, message = FALSE}
+```{R, warning = FALSE, message = FALSE, eval = FALSE}
 library(electionsBR)
 citation("electionsBR")
 
-presidente = president_mun_vote(year = 2010)
-head(presidente)
+presidente <- president_mun_vote(year = 2010)
+glimpse(presidente)
 
 ```
 
@@ -207,23 +208,12 @@ Tenha em mente, no entanto, que um mesmo processo pseudoaleatório gera os mesmo
 * Imagine que você tem um bot de twitter que tweeta aleatoriamente pedaços de letras de um artista, escolhidas ao acaso de um banco de dados com letras desse artista. Para não repetir a mesma escolha sempre, é bom tornar o processo de escolher a semente aleatório. Um bom truque é usar a função ``Sys.time()``, que pega data e hora no momento em que é rodada, combinar com a função ``as.numeric()`` para transforma-la em um número e então dar esse número como semente aleatória.
 
 ```{R}
-Sys.time()
-semente = as.numeric(Sys.time())
-print(semente)
-
 set.seed(as.numeric(Sys.time()))
-
-## ou alternativamente
-
-set.seed(semente)
-
 ```
 
 É também importante ter em mente quais são os argumentos padrão das funções sendo usadas. A função ``rnorm``, por exemplo, tem por padrão média 0 e desvio-padrão unitário - porque essa é a Normal Padrão. Lembre-se de que as funções para simular distribuições no R sempre recebem como argumento o _desvio-padrão_, no argumento ``sd=`` e não a variância. Já as funções da distribuição Gamma aceitam duas fórmulas diferentes para a densidade da distribuição, então é importante ler a documentação para saber como conseguir a que você quer.
 
 ```{r}
-
-## EXEMPLOS COM DISTRIBUIÇÕES DE PROBABILIDADE
 
 set.seed(1234) # semente definida
 
@@ -245,7 +235,7 @@ Podemos testar propriedades de dados para verificar se aderem à distribuições
 
 ```{R}
 
-X = rnorm(n = 2000,
+X <- rnorm(n = 2000,
           mean = 2,
           sd = sqrt(8))
 
