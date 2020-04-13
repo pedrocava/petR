@@ -19,17 +19,17 @@ R é uma linguagem de programação voltada para estatística e análise de dado
 knitr::include_graphics("data-science.png")
 ```
 
-Instalar o R é muito simples, ele está disponível em http://cran.r-project.org/. É importante depois instalar o RStudio, disponível em https://www.rstudio.org/, que é uma IDE (Integrated Development Enviroment). IDEs são progrmas que facilitam, e muito, programar porque trazem um ambiente gráfico mais intuitivo, disponibilizando informações como quais objetos estão carregados na memória do computador, visualização de gráficos e animações que fazemos e por aí vai. 
+Instalar R é muito simples, ele está disponível em http://cran.r-project.org/. É importante instalar também o RStudio, disponível em https://www.rstudio.org/, um Integrated Development Environment (IDE). IDEs são progrmas que facilitam, e muito, programar porque trazem um ambiente gráfico, disponibilizando informações como quais objetos estão carregados na memória do computador, visualização de gráficos, navegadores de arquivos, etc. 
 
 ```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
 knitr::include_graphics("rstudio.png")
 ```
 
-# Links importantes
+# Links Importantes
 
 * [Github](https://github.com)
 
-É como uma "rede social de códigos" com várias funcionalidades úteis para cuidar dos seus códigos e gerenciar projetos. É muito importante fazer uma conta lá e usar o programa para lidar adequadamente com o armazenamento dos códigos. O Github é particularmente útil para trabalhar com outras pessoas porque armazena versões antigas, quem fez que alterações nos códigos, evita conflito entre versões de programas e mantém tudo numa fonte única e facilmente acessível.
+É como uma "rede social de códigos" com várias funcionalidades úteis para cuidar dos seus scripts e gerenciar projetos. É muito importante fazer uma conta lá e usar o programa para lidar adequadamente com o armazenamento dos códigos. O Github é particularmente útil para trabalhar com outras pessoas porque armazena versões antigas, quem fez que alterações nos códigos, evita conflito entre versões de programas e mantém tudo numa fonte única e facilmente acessível.
 
 * [StackOverflow](https://stackoverflow.com/)
 
@@ -37,19 +37,18 @@ Um fórum extremamente popular em inglês sobre programação. A maior parte das
 
 * [CrossValidated](https://stats.stackexchange.com/)
 
-Uma espécie de StackOverflow, mas voltada para análise de dados. Quando a dúvida for mais estatístisca do que de programação em si, é melhor conferir aqui. A maioria dos usuários sabe R e vai pedir algum pedaço de código para entender o seu problema bem.
+Uma espécie de StackOverflow, mas voltada para análise de dados. Quando a dúvida for mais de estatístisca do que de programação em si, é melhor conferir aqui. A maioria dos usuários sabe R e vai pedir algum pedaço de código para entender o seu problema bem.
 
-* [R: Uma Introdução para Economistas](https://danmrc.github.io/R-para-Economistas/)
-
-Uma fonte ótima para consultas rápidas.
-
-* [R for Data Science](https://r4ds.had.co.nz)
+* [R for Data Science, Hadley Wickham e Garrett Grolemund](https://r4ds.had.co.nz)
 
 A fonte definitiva do R introdutório. É um livro em inglês muito extenso e deve cobrir razoavelmente qualquer assunto que um iniciante queira entender melhor. 
 
+
+* [Advanced R, Hadley Wickham](https://adv-r.hadley.nz/)
+
+
 # Os primeiros comandos
 
-Tenha em mente que você pode anotar linhas de código na área do script e rodar linhas específicas copiando-as no console, digiando-as diretamente lá ou selecionando o trecho do script desejado e apertando ``ctrl + enter``.
 
 A grande vantagem do R é sua natureza colaborativa. Pesquisadores, programadores, profissionais e entusiastas do mundo todo escrevem *pacotes* com funcionalidades novas, que incluem coisas como ferramentas para econometria bayseana, gerar animaçãoes, estimar dinâmicas evolutivas, resolver problemas de otimização e gerir blogs. Pacotes tem nomes e eles trazem *funções* novas. Normalmente nos referimos a uma função na forma ``pacote::função`` ou ``função()``. Então se lemos ``dplyr::filter`` sabemos que é a função ``filter()`` do pacote ``dplyr``. 
 
@@ -61,6 +60,8 @@ library(rootSolve)
 ```
 
 ``install.packages()`` só precisa que você dê o nome do pacote que o R instala para você. ``library()`` serve para carregar o pacote e ter essas funções novas disponíveis. Para saber quem fez o pacote e como devemos cita-lo em trabalhos acadêmicos, basta usar ``citation()``.
+
+
 
 ```{R}
 citation("rootSolve")
@@ -115,7 +116,14 @@ a == b # teste lógico
 
 ```
 
-Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação do texto. Algumas funções são simples o suficiente para que você não precise dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da função.
+Temos também como usar funções, pedaços prontos de código com funcionalidades específicas. Funções podem ou não admitir _argumentos_, que são especificados usando seu nome, um sinal de ``=`` e o valor do argumento, todos separados por vírgula. Por questões de organização de código, é bom pular uma linha para cada argumento, embora você possa usar formas alternativas de identação do texto. 
+
+
+> Tenha em mente que você pode anotar linhas de código na área do script e rodar linhas específicas copiando-as no console, digiando-as diretamente lá ou selecionando o trecho do script desejado e apertando ``ctrl + enter``.
+
+
+
+Algumas funções são simples o suficiente para que você não precise dizer exatamente qual argumento é qual, como é o caso de ``seq()``. ``seq()`` também tem outra pecualiaridade, seu argumento ``by``, que informa o tamanho do passo entre um elemento e outro da sequência é por padrão o número 1. Descobrimos isso lendo a documentação da função. Você pode acessa-la pela função ``help()`` ou apertando ``F1`` quando o cursor estiver em cima da função.
 
 ```{R, eval = FALSE}
 
